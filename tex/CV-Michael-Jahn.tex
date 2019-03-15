@@ -1,3 +1,16 @@
+% REQUIRED PACKAGES    -------------------------------------------------------------------------
+% 
+% 
+% texlive-latex-base
+% texlive-latex-recommended
+% texlive-latex-extra
+% texlive-fonts-recommended
+% texmaker
+% texmaker-data
+% cm-super
+% 
+%
+%
 %%  FORMAT     ---------------------------------------------------------------------------------
 \documentclass[11pt, a4paper, sans, blue]{moderncv}
 \usepackage[english]{babel}	% language and dictionary setting
@@ -9,7 +22,7 @@
 \usepackage{pdfpages}
 \usepackage{ragged2e}
 \moderncvstyle{casual} % CV theme - options include: 'casual' (default), 'classic', 'oldstyle' and 'banking'
-\moderncvcolor{blue}
+\moderncvcolor{green}
 
 %%  INFO       ---------------------------------------------------------------------------------
 \firstname{Michael}
@@ -19,8 +32,7 @@
 \mobile{+46\,76\,7812578}
 %\phone{}
 \email{michael.jahn$@$scilifelab.se}
-\photo[0.25\textwidth]{/home/micha/Documents/Dokumente/Applications-2015/Bewerbungsfotos/pic2_small.png}
-%	Alternativ: Passbild2_small.png
+\photo[0.25\textwidth]{../figures/pic2_small.png}
 
 
 %%  ENTRIES     ---------------------------------------------------------------------------------
@@ -29,28 +41,37 @@
 %----------------------------------------------------------------------------------------
 %	COVER LETTER
 %----------------------------------------------------------------------------------------
-\clearpage
-\thispagestyle{empty}
-\recipient{\color{color1} Prof. Paul Hudson}{\color{color1} Science For Life Lab \\ Tomtebodavägen 23A, Solna, Sweden} % Letter recipient
-\date{\today} % Letter date
-\opening{Dear Prof Hudson,} % Opening greeting
-\closing{\\ With best regards,} % Closing phrase
-\enclosure[Attached]{CV, list of publications and conference contributions, contacts for reference, PhD and diploma certificates, certificate 'Approved project manager for gene technology', selected publications.\\
-} % List of enclosed documents
+%\clearpage
+%\thispagestyle{empty}
+%\recipient{\color{color1} Recipient}{\color{color1} Adress line 1 \\ Adress line 2} % Letter recipient
+%\date{\today} % Letter date
+%\opening{Dear Recipient,} % Opening greeting
+%\closing{\\ With best regards,} % Closing phrase
+%\enclosure[Attached]{
+%  CV, 
+%  list of publications and conference contributions, 
+%  contacts for reference
+%  PhD and diploma certificates, 
+%  certificate 'Approved project manager for gene technology', 
+%  selected publications
+%  \\
+%} % List of enclosed documents
+%
+%\makelettertitle % Print letter title
+%\justifying
 
-\makelettertitle % Print letter title
-\justifying
+%I herewith want to apply for the post-doctoral position avertised in your lab.
 
-I herewith want to apply for the post-doctoral position avertised in your lab.
-
-I have been working in the field of microbial biotechnology since I started studying Biology at Technical University Dresden, Germany. I obtained my PhD at the Helmholtz-Centre for Environmental Research, Leipzig, working in the frame of an EU project together with eight academic and corporate partners. This highly applied project focused on the establishment of the solvent-tolerant bacterium \textit{Pseudomonas putida} as a host organism for demanding bioprocesses. I applied flow cytometry, cell sorting, mass spectrometry and digital PCR to identify and characterize single cell variability. During this time I was able to co-author several publications in the field of microbial systems biology and single cell analysis. For the past two years I was working at Science For Science Life Lab, Stockholm, with the goal to characterize growth bottlenecks in a model cyanobacterium using a systems biology approach. 
+%I have been working in the field of microbial biotechnology since I started studying Biology at Technical University Dresden, Germany. I obtained my PhD at the Helmholtz-Centre for Environmental Research, Leipzig, working in the frame of an EU project together with eight academic and corporate partners. This highly applied project focused on the establishment of the solvent-tolerant bacterium \textit{Pseudomonas putida} as a host organism for demanding bioprocesses. I applied flow cytometry, cell sorting, mass spectrometry and digital PCR to identify and characterize single cell variability. During this time I was able to co-author several publications in the field of microbial systems biology and single cell analysis. For the past two years I was working at Science For Science Life Lab, Stockholm, with the goal to characterize growth bottlenecks in a model cyanobacterium using a systems biology approach. 
  
-During my research career I acquired experience with many important microbial strains regarding cultivation and molecular genetics, including the design of genetic constructs for \textit{E.\,coli}, \textit{P.\,putida} and \textit{S.\,cerevisiae}. I am experienced in the use of Omics technologies, especially mass spectrometry based proteomics, and have developed methods for combination of MS based proteomics with cell sorting. Furthermore, I have strong expertise in bioinformatic analysis of high-throughput data including the development of custom platforms for data processing and visualization using the programming language R. 
+%During my research career I acquired experience with many important microbial strains regarding cultivation and molecular genetics, including the design of genetic constructs for \textit{E.\,coli}, \textit{P.\,putida} and \textit{S.\,cerevisiae}. I am experienced in the use of Omics technologies, especially mass spectrometry based proteomics, and have developed methods for combination of MS based proteomics with cell sorting. Furthermore, I have strong expertise in bioinformatic analysis of high-throughput data including the development of custom platforms for data processing and visualization using the programming language R. 
 
-My primary research interest is to use molecular biology for creating tailor-made microbes, and to employ such strains for the sustainable production of chemicals or biologics. The advertised position would therefore ideally complement my research background.
-I would be happy to discuss ideas regarding this project and look forward to hearing from you.
-\makeletterclosing % Print letter signature
+%My primary research interest is to use molecular biology for creating tailor-made microbes, and to employ such strains for the sustainable production of chemicals or biologics. The advertised position would therefore ideally complement my research background.
+%I would be happy to discuss ideas regarding this project and look forward to hearing from you.
+%
+%\makeletterclosing % Print letter signature
 
+% use only this command to print the title (picture and head)
 \maketitle
 
 \setcounter{page}{1}
@@ -61,7 +82,7 @@ I would be happy to discuss ideas regarding this project and look forward to hea
 \cvitem{Current residence}{Sturegatan 30, 17231 Sundbyberg, SE}
 \cvitem{Mobile phone}{+46\,76\,7812578}
 \cvitem{Email}{michael.jahn$@$scilifelab.se}
-\cvitem{Current position}{PostDoc, Science For Life Lab, Stockholm}
+\cvitem{Current position}{PostDoc, Science For Life Laboratory, Stockholm}
 
 \section{Awards}
 \cvitem{Nov 25, 2015}{\textbf{PhD-Award} 2015 by the Helmholtz-Centre for Environmental Research, Leipzig.}
@@ -109,7 +130,7 @@ I would be happy to discuss ideas regarding this project and look forward to hea
 \section{Languages}
 \cventry{German}{Native language}{}{}{}{}
 \cventry{English}{Proficient user}{}{CEF level C1}{}{}
-\cventry{French}{Basic user}{}{CEF level A1-A2}{}{}{}
+\cventry{Swedish}{Basic user}{}{CEF level A2}{}{}{}
 
 
 %\section{Fields of interest, hobbies}
@@ -121,45 +142,49 @@ I would be happy to discuss ideas regarding this project and look forward to hea
 
 % List of publications -----------------------------
 \section{Publications}
-\cvitem{1}{\textbf{Jahn M}, Vorpahl C, Hübschmann T, Harms H, Müller S. \textit{Copy number variability of expression plasmids determined by cell sorting and Droplet Digital PCR}.  Microbial Cell Factories, \textbf{2016}.}
-\cvitem{2}{Lindmeyer M, \textbf{Jahn M}, Vorpahl C, Müller S, Schmid A, Bühler B. \textit{Variability in subpopulation formation propagates into biocatalytic variability of engineered Pseudomonas putida strains}.  Frontiers in microbiology 6, \textbf{2015}.}
-\cvitem{3}{Lieder S, \textbf{Jahn M}, Koepff J, Müller S, Takors Ralf. \textit{Environmental stress speeds up DNA replication in Pseudomonas putida in chemostat cultivations}.  Biotechnology journal, \textbf{2015}.}
-\cvitem{4}{\textbf{Jahn M}, Günther S, Müller S. \textit{Non-random distribution of macromolecules as driving forces for phenotypic variation}. Current Opinion in Microbiology. 25:49-55, \textbf{2015}.}
-\cvitem{5}{Rödiger S, Burdukiewicz M, Blagodatskikh K, \textbf{Jahn M}, Schierack P. \textit{R as an environment for reproducible analysis of DNA amplification experiments}. R Journal 7/1:127-150, \textbf{2015}.}
-\cvitem{6}{\textbf{Jahn M}, Vorpahl C, Türkowsky D, Lindmeyer M, Bühler B, Harms H, Müller S. \textit{Accurate determination of plasmid copy number of flow-sorted cells using droplet digital PCR}. Analytical Chemistry 86:5969-76, \textbf{2014}.}
-\cvitem{7}{Lieder S, \textbf{Jahn M}, Seifert J, von Bergen M, Müller S, Takors R. \textit{Subpopulation-proteomics reveal growth rate, but not cell cycling, as a major impact on protein composition in} Pseudomonas putida \textit{KT2440}. AMB Express 4:71, \textbf{2014}.}
-\cvitem{8}{\textbf{Jahn M}, Seifert J, von Bergen M, Schmid A, Bühler B, Müller S. \textit{Subpopulation-proteomics in prokaryotic populations}. Current Opinion in Biotechnology 24:79-87, \textbf{2013}.}
-\cvitem{9}{\textbf{Jahn M}, Seifert J, Hübschmann T, von Bergen M, Harms H, Müller S. \textit{Comparison of preservation methods for bacterial cells in cytomics and proteomics}. Journal Of Integrated Omics 3:1-9, \textbf{2013}.}
-\cvitem{20}{\textbf{Jahn M}, Mölle A, Rödel G, Ostermann K. \textit{Temporal and spatial properties of a yeast multi-cellular amplification system based on signal molecule diffusion}. Sensors 13:14511-22, \textbf{2013}.}
+%
+% template:
+%
+%\cvitem{n}{\textbf{Jahn M}, Name N. \textit{title}. Journal, \textbf{year}.}
+
+\cvitem{1}{Karlsen J, Asplund-Samuelsson J, Thomas Q, \textbf{Jahn M}, Hudson EP. \textit{Ribosome Profiling of Synechocystis Reveals Altered Ribosome Allocation at Carbon Starvation}. MSystems 3, e00126-18, \textbf{2018}.}
+
+\cvitem{2}{\textbf{Jahn M}, Vialas V, Karlsen J, Maddalo G, Edfors F, Forsström B, Uhlén M, Käll L, Hudson EP. \textit{Growth of Cyanobacteria Is Constrained by the Abundance of Light and Carbon Assimilation Proteins}. Cell Reports 25, 478–486.e8., \textbf{2018}.}
+
+\cvitem{3}{Shabestary K, Anfelt J, Ljungqvist E, \textbf{Jahn M}, Yao L, Hudson EP. \textit{Targeted Repression of Essential Genes To Arrest Growth and Increase Carbon Partitioning and Biofuel Titers in Cyanobacteria}. ACS Synthetic Biology, 7, 1669–1675, \textbf{2018}.}
+
+\cvitem{4}{\textbf{Jahn M}, Vorpahl C, Hübschmann T, Harms H, Müller S. \textit{Copy number variability of expression plasmids determined by cell sorting and Droplet Digital PCR}.  Microbial Cell Factories, \textbf{2016}.}
+
+\cvitem{5}{Lindmeyer M, \textbf{Jahn M}, Vorpahl C, Müller S, Schmid A, Bühler B. \textit{Variability in subpopulation formation propagates into biocatalytic variability of engineered Pseudomonas putida strains}.  Frontiers in microbiology 6, \textbf{2015}.}
+
+\cvitem{6}{Lieder S, \textbf{Jahn M}, Koepff J, Müller S, Takors Ralf. \textit{Environmental stress speeds up DNA replication in Pseudomonas putida in chemostat cultivations}.  Biotechnology journal, \textbf{2015}.}
+
+\cvitem{7}{\textbf{Jahn M}, Günther S, Müller S. \textit{Non-random distribution of macromolecules as driving forces for phenotypic variation}. Current Opinion in Microbiology. 25:49-55, \textbf{2015}.}
+
+\cvitem{8}{Rödiger S, Burdukiewicz M, Blagodatskikh K, \textbf{Jahn M}, Schierack P. \textit{R as an environment for reproducible analysis of DNA amplification experiments}. R Journal 7/1:127-150, \textbf{2015}.}
+
+\cvitem{9}{\textbf{Jahn M}, Vorpahl C, Türkowsky D, Lindmeyer M, Bühler B, Harms H, Müller S. \textit{Accurate determination of plasmid copy number of flow-sorted cells using droplet digital PCR}. Analytical Chemistry 86:5969-76, \textbf{2014}.}
+
+\cvitem{10}{Lieder S, \textbf{Jahn M}, Seifert J, von Bergen M, Müller S, Takors R. \textit{Subpopulation-proteomics reveal growth rate, but not cell cycling, as a major impact on protein composition in} Pseudomonas putida \textit{KT2440}. AMB Express 4:71, \textbf{2014}.}
+
+\cvitem{11}{\textbf{Jahn M}, Seifert J, von Bergen M, Schmid A, Bühler B, Müller S. \textit{Subpopulation-proteomics in prokaryotic populations}. Current Opinion in Biotechnology 24:79-87, \textbf{2013}.}
+
+\cvitem{12}{\textbf{Jahn M}, Seifert J, Hübschmann T, von Bergen M, Harms H, Müller S. \textit{Comparison of preservation methods for bacterial cells in cytomics and proteomics}. Journal Of Integrated Omics 3:1-9, \textbf{2013}.}
+
+\cvitem{13}{\textbf{Jahn M}, Mölle A, Rödel G, Ostermann K. \textit{Temporal and spatial properties of a yeast multi-cellular amplification system based on signal molecule diffusion}. Sensors 13:14511-22, \textbf{2013}.}
+
 \newpage
 
-\section{Conference contributions}
+\section{Conference presentations}
 
-\cvitem{Jul 20--22, 2015}{\textbf{Single Cell VI} -- 6\textsuperscript{th} International Conference on Analysis of Microbial Cells at the Single Cell Level, Retz (Austria), presentation}
-\cvitem{Oct 15--17, 2014}{\textbf{DGFZ} -- 24\textsuperscript{th} Annual Conference of the German Society for Cytometry, Dresden, presentation}
-\cvitem{Jul 13--16, 2014	}{\textbf{ECB16} -- 16\textsuperscript{th} European Congress on Biotechnology, Edinburgh,	 presentation}
-\cvitem{May 26--28, 2014}{\textbf{DECHEMA} -- Biomaterials Made in Bioreactors, Dresden, poster}
-\cvitem{Mar 06--08, 2013	}{\textbf{RPP7} -- 7\textsuperscript{th} European Conference on Recombinant Protein Production, Ulm, presentation}	
-\cvitem{Jul 21--25, 2013	}{\textbf{FEMS} -- 5\textsuperscript{th} Congress of European Microbiologists, Leipzig, poster}
-\cvitem{Oct 10--12, 2012}{\textbf{DGFZ} -- 22\textsuperscript{nd} Annual Conference of the German Society for Cytometry, Bonn, presentation}
-\cvitem{Jun 23--27, 2012}{\textbf{CYTO 2012} -- 27\textsuperscript{th} Congress of the International Society for Advancement of Cytometry, Leipzig, presentation}
-
-%\section{Contacts for Reference}
-%\cvitem{1}{
-%\textbf{Prof. Dr. Hauke Harms} \newline
-%Department of Environmental Microbiology \newline
-%Helmholtz Centre for Environmental Research -- UFZ \newline
-%Permoserstraße 15 / 04318 Leipzig / Germany \newline
-%Phone: +49\,341\,2351260 / Fax: +49\,341\,2351351 \newline
-%Email: hauke.harms$@$ufz.de}
-
-%\cvitem{2}{
-%\textbf{Prof. Dr. Andreas Schmid} \newline
-%Department Solar Materials \& MIKAT- Center for Biocatalysis \newline
-%Helmholtz Centre for Environmental Research -- UFZ \newline
-%Permoserstraße 15 / 04318 Leipzig / Germany \newline
-%Phone: +49\,341\,2351246 / Fax: +49\,341\,235451286 \newline
-%Email: andreas.schmid$@$ufz.de}
-
+\cvitem{Oct 24--26, 2018}{\textbf{4th Applied Synthetic Biology Conference} -- 6\textsuperscript{th} Toulouse, France}
+\cvitem{Jul 20--22, 2015}{\textbf{Single Cell VI} -- 6\textsuperscript{th} International Conference on Analysis of Microbial Cells at the Single Cell Level, Retz / Austria}
+\cvitem{Oct 15--17, 2014}{\textbf{DGFZ} -- 24\textsuperscript{th} Annual Conference of the German Society for Cytometry, Dresden}
+\cvitem{Jul 13--16, 2014	}{\textbf{ECB16} -- 16\textsuperscript{th} European Congress on Biotechnology, Edinburgh}
+%\cvitem{May 26--28, 2014}{\textbf{DECHEMA} -- Biomaterials Made in Bioreactors, Dresden, poster}
+\cvitem{Mar 06--08, 2013	}{\textbf{RPP7} -- 7\textsuperscript{th} European Conference on Recombinant Protein Production, Ulm}	
+%\cvitem{Jul 21--25, 2013	}{\textbf{FEMS} -- 5\textsuperscript{th} Congress of European Microbiologists, Leipzig, poster}
+\cvitem{Oct 10--12, 2012}{\textbf{DGFZ} -- 22\textsuperscript{nd} Annual Conference of the German Society for Cytometry, Bonn}
+\cvitem{Jun 23--27, 2012}{\textbf{CYTO 2012} -- 27\textsuperscript{th} Congress of the International Society for Advancement of Cytometry, Leipzig}
 
 \end{document}
