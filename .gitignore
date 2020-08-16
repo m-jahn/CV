@@ -1,6 +1,6 @@
-tex/CV-Michael-Jahn.aux
-tex/CV-Michael-Jahn.log
-tex/CV-Michael-Jahn.out
-tex/CV-Michael-Jahn.pdf
-tex/CV-Michael-Jahn.synctex.gz
-tex/missfont.log
+*.aux
+*.log
+*.out
+*.gz
+.Rhistory
+tex/*.pdf
