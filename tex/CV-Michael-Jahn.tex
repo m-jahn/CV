@@ -9,13 +9,13 @@
 % texmaker-data
 % cm-super
 % 
-%
-%
+% 
+% 
 %%  FORMAT     ---------------------------------------------------------------------------------
 \documentclass[11pt, a4paper, sans, blue]{moderncv}
 \usepackage[english]{babel}	% language and dictionary setting
 \usepackage[utf8]{inputenc}	% latin encoding
-\usepackage[T1]{fontenc}	% T1 encoded CM-fonts, synaptic package cm-super!
+\usepackage[T1]{fontenc}	% T1 encoded CM-fonts, requires synaptic package cm-super!
 \usepackage{upgreek}		% upright standing small greek letters, usage with $ \upletter $
 \usepackage[scale=0.78]{geometry} % Reduce document margins
 \usepackage{hyphenat}
@@ -35,35 +35,16 @@
 \photo[0.25\textwidth]{../figures/pic2_small.png}
 
 
-%%  ENTRIES     ---------------------------------------------------------------------------------
+
 \begin{document}
 
-%----------------------------------------------------------------------------------------
-%	COVER LETTER
-%----------------------------------------------------------------------------------------
-\clearpage
-\thispagestyle{empty}
-\recipient{\color{color1} Name}{\color{color1} Institution \\ Street adress, City, Country} % Letter recipient
-\date{\today} % Letter date
-\opening{Dear recipient,} % Opening greeting
-\closing{\\ With best regards,} % Closing phrase
-\enclosure[Attached]{CV, list of publications and conference contributions, contacts for reference, PhD and diploma certificates, certificate 'Approved project manager for gene technology'.\\
-} % List of enclosed documents
-
-\makelettertitle % Print letter title
-\justifying
-
-I herewith want to apply for ...
-%
-%I have been working in the field of microbial biotechnology since I started studying Biology at Technical University Dresden, Germany. I obtained my PhD at the Helmholtz-Centre for Environmental Research, Leipzig, working in the frame of an EU project together with eight academic and corporate partners. This highly applied project focused on the establishment of the solvent-tolerant bacterium \textit{Pseudomonas putida} as a host organism for demanding bioprocesses. I applied flow cytometry, cell sorting, mass spectrometry and digital PCR to identify and characterize single cell variability. During this time I was able to co-author several publications in the field of microbial systems biology and single cell analysis. For the past two years I was working at Science For Science Life Lab, Stockholm, with the goal to characterize growth bottlenecks in a model cyanobacterium using a systems biology approach. 
-% 
-%During my research career I acquired experience with many important microbial strains regarding cultivation and molecular genetics, including the design of genetic constructs for \textit{E.\,coli}, \textit{P.\,putida} and \textit{S.\,cerevisiae}. I am experienced in the use of Omics technologies, especially mass spectrometry based proteomics, and have developed methods for combination of MS based proteomics with cell sorting. Furthermore, I have strong expertise in bioinformatic analysis of high-throughput data including the development of custom platforms for data processing and visualization using the programming language R. 
-%
-%My primary research interest is to use molecular biology for creating tailor-made microbes, and to employ such strains for the sustainable production of chemicals or biologics. The advertised position would therefore ideally complement my research background.
-%I would be happy to discuss ideas regarding this project and look forward to hearing from you.
-\makeletterclosing % Print letter signature
+%%  OPTIONAL COVERLETTER    ---------------------------------------------------------------------
+% include optional cover letter
+%\input{coverletter.tex}
 
 \newpage
+
+%%  ENTRIES     ---------------------------------------------------------------------------------
 
 \maketitle
 
@@ -80,68 +61,114 @@ I herewith want to apply for ...
 
 
 \section{Current position}
-\cvitem{}{\textbf{Post-doctoral fellow}, Group of Prof Paul Hudson, Science For Life Laboratory, Stockholm. Topic: Systems biology and metabolic engineering of photoautotrophic bacteria.}
-
-
-\section{Awards}
-\cvitem{Nov 25, 2015}{\textbf{PhD-Award} 2015 by the Helmholtz-Centre for Environmental Research, Leipzig. Awarded annually for excellence of the dissertation.}
+\cvitem{}{\textbf{Post-doctoral fellow}, Group of Prof. Paul Hudson, Science For Life Laboratory, Stockholm. Topic: Systems biology and metabolic engineering of photoautotrophic bacteria.}
 
 
 \section{Education}
 \cventry{July 10, 2015}{Graduated \textit{Doctor rerum naturalium}}{}{ at the University of Leipzig, Germany, with \textit{summa cum laude} (1.0)}{}{}
-\cventry{2011--2015}{PhD studies}{}{Group of Flow Cytometry (Prof. Susann Müller), Dept. Environmental Microbiology, 
-	Helmholtz-Centre for Environmental Research, Leipzig. \newline
+\cventry{2011--2015}{PhD studies}{}{Group of Prof. Susann Müller, Dept. Environmental Microbiology, Helmholtz-Centre for Environmental Research, Leipzig. \newline
 	Thesis: 'Characterization of population heterogeneity in a model biotechnological process using \textit{Pseudomonas putida}'}{}{}
-\cventry{2005--2011}{Diploma studies, biology}{}{Dresden University of Technology (TUD), main subjects: genetics, biochemistry, immunology. 			\newline
+\cventry{2005--2011}{Diploma studies, biology}{}{Dresden University of Technology (TUD), main subjects: genetics, biochemistry, immunology. \newline
 	Diploma thesis: 'Dynamic mating pheromone gradients for induction of mating projection and fluorescence in yeast', group of Prof Gerhard Rödel, grade 1.2}{}{}
 \cventry{1996--2004}{High school}{}{Romain-Rolland-Gymnasium, Dresden}{Abitur with grade 1.6}{}{}
 \cventry{1992--1996}{Elementary school}{}{Dresden}{}{}
 
 
 \section{Work experience}
-\cventry{05/2016--now }{Post-Doctoral Research}{}{Systems biology analysis of cyanobacteria (Prof. P. Hudson), Science For Life Lab, Stockholm}{}{}
-\cventry{08--12/2009}{Erasmus internship}{}{Center of Excellence in Evolutionary Genetics and Physiology (Prof. Nikinmaa), Dept. of Biology, University of Turku, Finland}{}{}
-\cventry{2008--2009}{Student assistant}{}{Institute of Genetics}{Dept. of Biology at TUD}{}
+\cventry{5/2016--now}{Post-doctoral researcher}{}{Systems biology analysis of cyanobacteria at the group of Prof. Paul Hudson, Science For Life Laboratory, Stockholm (belongs to KTH)}{}{}
+\cventry{8--12/2009}{Erasmus internship}{}{Center of Excellence in Evolutionary Genetics and Physiology at the group of Prof. Mikko Nikinmaa, Dept. of Biology, University of Turku, Finland}{}{}
+\cventry{2008--2009}{Student assistant}{}{Institute of Genetics}{group of Prof. Gerhard Rödel, Dept. of Biology, Dresden University of Technology (TUD)}{}
 \cventry{2007--2008}{Student assistant}{}{Mitteldeutscher Praxisverbund Humangenetik, Dresden}{}{}
 \cventry{2004--2005}{Voluntary service 'Freiwilliges Ökologisches Jahr'}{}{national park 'Sächsische Schweiz'}{tour guide and education}{}
 
 
+\section{Leaves}
+\cvitem{11/2019--5/2020}{Parental leave with 2\textsuperscript{nd} child Sophie}
+\cvitem{9/2015--5/2016}{Parental leave with 1\textsuperscript{st} child Simon}
+
+
+\section{Awards}
+\cvitem{Nov 25, 2015}{\textbf{PhD-Award} 2015 by the Helmholtz-Centre for Environmental Research, Leipzig. Awarded annually for excellence of the dissertation, prize money 1,000 Euro.}
+
+
 \section{Awarded grants}
-\cvitem{11, 2019}{\textbf{Investigation of protein resource allocation in the model CO2 fixing bacterium Ralstonia eutropha} (Swedish: Undersökning av proteiners resursfördelning i en modell för CO2-fixerande bakterier, Ralstonia eutropha). Funding agency: FORMAS. Project number: 2019-01491. Project leader: Dr. Michael Jahn. Awarded funding for period 2020-01-01-2021-12-31: 2,000,000 SEK}
+\cvitem{Nov 11, 2019}{\textbf{Investigation of protein resource allocation in the model CO\textsubscript{2} fixing bacterium \textit{Ralstonia eutropha}} (Swedish: Undersökning av proteiners resursfördelning i en modell för CO\textsubscript{2}-fixerande bakterier, Ralstonia eutropha). \newline
+Funding agency: FORMAS. Project number: 2019-01491. Project leader: Dr. Michael Jahn. Awarded funding for period 2020-01-01-2021-12-31. Total funds: 2,000,000 SEK (equals around 200,000 Euro).}
 
 
 \section{Teaching and supervision}
+\cvitem{Teaching}{Planned teaching activity for the \textbf{course CB2030 'Systems biology'} at Kungliga Tekniska Högskolan (KTH, together with Prof. Lukas Käll), study period winter 2019 -- spring 2020. Teaching activity was unfortunately postponed due to parental leave and COVID-19 outbreak. It is intended to resume teaching  activity as soon as possible. Topics covered for this course among others: Pathway Analysis, Genome-scale metabolic models, Flux Balance Analysis. Course volume: 7.5 credit points.}
 
+\cvitem{Supervision}{Supervised several master and intern students during my PhD and postdoctoral studies: \newline
+\listitemsymbol Alexander Mattausch, intern biotechnology, University of Heidelberg, 2019\newline 
+\listitemsymbol Timothy Bergmann, master student biotechnology (KTH, Stockholm), 2019\newline
+\listitemsymbol Raquel Perruca, master student, Lund Technical University, 2018\newline
+\listitemsymbol Carsten Vorpahl, master student University of Leipzig, 2015\newline\listitemsymbol Dominique Türkowsky, master student University of Leipzig, 2014\newline
+}
+
+
+\section{Scientific interests and expertise}
+
+\cvitem{Sustainability}{Current overuse of (fossil) planetary resources and disposal of non-degradable waste into the environement makes the shift towards a sustainable economy mandatory. The concept of the \textbf{bioeconomy} entails that conventional chemical processes or materials be replaced with sustainable ones. Autotrophic microbes can play their roll as a versatile, efficient and biodegradable catalyst.}
+
+\cvitem{Metabolic modeling, data science and visualization}
+{High-throughput methods generate larger amounts of biological data than ever before. This poses problems, but also opportunities. I envision a close integration of experiments and data with \textbf{predictive mathematical models}, such as genome scale metabolic models models. This allows to integrate the current state of knowledge into a coherent system, spot contradictions or errors, and identify overarching themes in metabolism.}
+
+\cvitem{Metabolic engineering}
+{Microbial cells are 'programmed' for production of biomass, not fine chemicals. \textbf{Rational design and engineering of pathways} is necessary to turn photo-autotrophic bacteria into 'solar power plants'.}
+
+\cvitem{Proteomics \& other 'omics}
+{Proteomics, transcriptomics and metabolomics are probing the whole 'system' of the cell instead of isolated parts. This allows to discover biological relationships that were not considered in the original hypothesis, and gives an unbiased picture.}
+
+\cvitem{Single cell variability}
+{Previous work regarding \textbf{single cell variability} of \textit{S. cerevisiae}, \textit{E. coli}, and \textit{Pseudomonas putida} showed me that a population is never uniform but varies extensively in size, shape, productivity, and plasmid copy number. Future projects aiming to build improved cellular catalysts have to consider this variability. Flow cytometry and cell sorting can be used to select the most productive mutants.}
+
+\cvitem{Reproducibility and Transparency}
+{Adopting \textbf{open standards, sharing protocols and resources}, and depositing data and apps on publicly available sites has great advantages. It increases reach, trust of the scientific community, and reproducibility of results.}
 
 
 \section{Qualifications and skills}
 \cvitem{Courses}{Approved project manager for genetic works, according to German laws (\S ~14,15 GenTSV), 2015. \newline
-	Laser scanning microscopy, 1 week intensive course, 2013. \newline
-	Scientific writing, project proposal writing, 2013.}
-\cvitem{Molecular genetics}{Handling of microbes (\textit{E.\,coli}, \textit{P.\,putida}, \textit{S.\,cerevisiae}) \newline
-	Molecular genetics: DNA, RNA, protein extraction	and purification \newline
-	Vector design, DNA cloning, recombinant gene expression \newline
-	Droplet Digital PCR, qRT-PCR, gel electrophoresis}
-\cvitem{High-throughput	 techniques}{Flow cytometry, cell sorting \newline
-	Mass spectrometry, proteomics \newline
-	Metabolic mapping, data mining, visualization \newline
-	Automated microscopic imaging}
-\cvitem{Software \& Programming}{Languages: R (advanced), Latex (advanced), Python (beginner) \newline
-	Mass spectrometry: openMS, script-based tools
-	Imaging: CellProfiler, ImageJ, Inkscape, GIMP \newline
-	Flow cytometry: R flow packages, Summit, FlowJo \newline
-	Genome and proteome databases: NCBI, DAVID, KEGG, BioCyc \newline}
-\cvitem{Other}{Driver's license}
+Laser scanning microscopy, 1 week course, 2013. \newline
+Scientific writing and project proposal writing, 2 week course , 2013.}
+	
+\cvitem{Model organisms}{Experienced in cultivation and molecular biology works of cyanobacteria (e.g. \textit{Synechocystis sp.}, \textit{Synechococcus}), \textit{Cupriavidus necator}, \textit{Pseudomonas putida}, \textit{E.\,coli})}
+	
+\cvitem{Important techniques}{
+Bioreactor cultivation, chemostat, turbidostat \newline
+Mass spectrometry, proteomics \newline
+Flow cytometry, cell sorting, automated imaging \newline
+Metabolic mapping, data mining, visualization \newline
+Molecular biology work (DNA and proein extraction, cloning)
+}
+
+\cvitem{Programming lanuguages}{R (advanced), Python (moderate)}
+
+\cvitem{Authored R packages}{
+\href{https://github.com/m-jahn/SysbioTreemaps}{\color{darkgray}SysbioTreemaps} -- visualizing gene expression with treemaps\newline
+\href{https://m-jahn.shinyapps.io/ShinyMC/}{\color{darkgray}ShinyMC} -- interactive app to monitor bioreactor cultivations\newline
+\href{https://m-jahn.shinyapps.io/ShinyProt/}{\color{darkgray}ShinyProt} -- interactive app to visualize proteomics data\newline
+\href{https://m-jahn.shinyapps.io/ShinyLib/}{\color{darkgray}ShinyLib} -- interactive app to visualize gene knockout library data\newline
+}
+
+\cvitem{Metabolic models}{
+Improved \textit{Synechocystis} coarse grained (simplified) resource allocation model, for \href{https://github.com/m-jahn/cell-economy-model-legacy}{\color{darkgray}GAMS}, and \href{https://github.com/m-jahn/cell-economy-model}{\color{darkgray}ported to python}. \newline
+%
+Improved and updated \href{https://github.com/m-jahn/genome-scale-models}{\color{darkgray}genome scale model (GEM)} for \textit{Cupriavidus necator} a.k.a. \textit{Ralstonia eutropha}. \newline
+%
+Constructed new genome scale \href{https://github.com/m-jahn/genome-scale-models}{\color{darkgray}resource balance (RBA) model} for \textit{Cupriavidus necator} a.k.a. \textit{Ralstonia eutropha}
+}
 
 
 \section{Peer review and outreach}
-\cvitem{Peer review}{I'm an active reviewer for several journals including Microbial Cell Factories, Frontiers, Photosynthesis Research, and others. The full list of my review contributions is available via \href{https://publons.com/researcher/1192906/michael-jahn/}{Publons.org}}. 
+\cvitem{Peer review}{Active reviewer for several journals including Microbial Cell Factories, Frontiers in Microbiology, Photosynthesis Research, and others. The full list of my review contributions is available via \href{https://publons.com/researcher/1192906/michael-jahn/}{\color{darkgray}Publons.org}}.
 
-\cvitem{Platforms}{\href{https://github.com/m-jahn/}{\color{darkgray} My github page$\nearrow$}}
+\cvitem{Platforms}{\href{https://m-jahn.github.io/}{\color{darkgray}My home page$\nearrow$}}
+\cvitem{}{\href{https://github.com/m-jahn/}{\color{darkgray} My github page$\nearrow$}}
 \cvitem{}{\href{https://orcid.org/0000-0002-3913-153X}{\color{darkgray}My ORCID page$\nearrow$}}
 \cvitem{}{\href{https://publons.com/researcher/1192906/michael-jahn/}{\color{darkgray}My Publons page$\nearrow$}}
 \cvitem{}{\href{https://www.researchgate.net/profile/Michael_Jahn}{\color{darkgray}My ResearchGate page$\nearrow$}}
-\cvitem{}{\href{https://twitter.com/mich_jahn}{\color{darkgray}My Twitter account$\nearrow$}}
+\cvitem{}{\href{https://twitter.com/mich_jahn}{\color{darkgray}My Twitter page$\nearrow$}}
 
 
 \section{Languages}
@@ -149,8 +176,8 @@ I herewith want to apply for ...
 \cventry{English}{Proficient user}{}{CEF level C1}{}{}
 \cventry{Swedish}{Vantage user}{}{CEF level B2}{}{}{}
 
-
 \newpage
+
 
 % List of publications -----------------------------
 \section{Publications}

@@ -4,3 +4,4 @@
 *.gz
 .Rhistory
 tex/*.pdf
+tex/coverletter.tex
