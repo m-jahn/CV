@@ -78,38 +78,13 @@
 
 % if... then... else... constructs
 \RequirePackage{ifthen}
-% TODO: move to xifthen and \isempty{<arg>} instead of \equal{<arg>}{}
 
 % color
 \RequirePackage{xcolor}
 
-% font loading
-%\usepackage{ifxetex,ifluatex}
-%\newif\ifxetexorluatex
-%\ifxetex
-%  \xetexorluatextrue
-%\else
-%  \ifluatex
-%    \xetexorluatextrue
-%  \else
-%    \xetexorluatexfalse
-%  \fi
-%\fi
-% automatic loading of latin modern fonts
-%\ifxetexorluatex
-%  \RequirePackage{fontspec}
-%  \defaultfontfeatures{Ligatures=TeX}
-%  \RequirePackage{unicode-math}
-%  \setmainfont{Latin Modern}
-%  \setsansfont{Latin Modern Sans}
-%  \setmathfont{Latin Modern Math}
-%\else
-  \RequirePackage[T1]{fontenc}
-  \IfFileExists{lmodern.sty}%
-    {\RequirePackage{lmodern}}%
-    {}
-%\fi
-
+% fonts
+\usepackage[T1]{fontenc} % computer modern fonts (default)
+\usepackage[sfdefault,light]{roboto} % requires package texlive-fonts-extra
 % MarVoSym font for symbols
 %\RequirePackage{marvosym}
 \newcommand*{\marvosymbol}[1]{}
