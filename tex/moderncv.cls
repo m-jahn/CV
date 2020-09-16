@@ -83,8 +83,8 @@
 \RequirePackage{xcolor}
 
 % fonts
-\usepackage[T1]{fontenc} % computer modern fonts (default)
-\usepackage[sfdefault,light]{roboto} % requires package texlive-fonts-extra
+\RequirePackage[T1]{fontenc} % computer modern fonts (default)
+\RequirePackage[sfdefault,light]{roboto} % requires package texlive-fonts-extra
 % MarVoSym font for symbols
 %\RequirePackage{marvosym}
 \newcommand*{\marvosymbol}[1]{}
@@ -153,6 +153,14 @@
 % compatibility package with older versions of moderncv
 \RequirePackageWithOptions{moderncvcompatibility}
 
+% Other packages for fonts, language or layout
+\RequirePackage[english]{babel}	% language and dictionary setting
+\RequirePackage[utf8]{inputenc}	% latin encoding
+\RequirePackage{upgreek}		% upright standing small greek letters
+\RequirePackage[scale=0.78]{geometry} % Reduce document margins
+\RequirePackage{hyphenat}
+\RequirePackage{pdfpages}
+\RequirePackage{ragged2e}
 
 %-------------------------------------------------------------------------------
 %                class definition
