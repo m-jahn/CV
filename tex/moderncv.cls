@@ -51,8 +51,8 @@
 \DeclareOption{12pt}{\renewcommand\@ptsize{2}}
 
 % font type options
-\DeclareOption{sans}{\AtBeginDocument{\renewcommand{\familydefault}{\sfdefault}}}
-\DeclareOption{roman}{\AtBeginDocument{\renewcommand{\familydefault}{\rmdefault}}}
+%\DeclareOption{sans}{\AtBeginDocument{\renewcommand{\familydefault}{\sfdefault}}}
+%\DeclareOption{roman}{\AtBeginDocument{\renewcommand{\familydefault}{\rmdefault}}}
 
 % draft/final option
 \DeclareOption{draft}{\setlength\overfullrule{5pt}}
@@ -83,8 +83,8 @@
 \RequirePackage{xcolor}
 
 % fonts
-\RequirePackage[T1]{fontenc} % computer modern fonts (default)
 \RequirePackage[sfdefault,light]{roboto} % requires package texlive-fonts-extra
+%\RequirePackage[T1]{fontenc} % computer modern fonts (default)
 % MarVoSym font for symbols
 %\RequirePackage{marvosym}
 \newcommand*{\marvosymbol}[1]{}
