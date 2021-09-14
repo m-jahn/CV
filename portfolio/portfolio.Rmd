@@ -1,0 +1,214 @@
+---
+title: "Projects and Publications  |  Michael Jahn, PhD"
+output:
+  pdf_document: default
+  html_document:
+    theme: cosmo
+    df_print: paged
+  html_notebook:
+    theme: cosmo
+---
+
+----------
+
+```{r, echo = FALSE}
+# GLOBAL OPTIONS
+# ==============
+#
+# attach libraries
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(lattice)
+  library(latticeExtra)
+  library(latticetools)
+  library(scholar)
+  library(gh)
+})
+
+# customize theme
+theme = custom.colorblind()
+# these options remove white space
+theme$layout.heights$axis.top = 0.5
+theme$layout.heights$top.padding = 0.8
+theme$layout.heights$axis.bottom = 0.95
+theme$layout.heights$bottom.padding = -0.2
+theme$layout.widths$axis.right = 0.5
+theme$layout.widths$axis.left = 0.95
+theme$layout.widths$right.padding = 1
+theme$layout.widths$left.padding = 0.5
+
+# set scholar ID
+scholar_id <- "jApo8PEAAAAJ"
+
+# set github user ID
+github_id <- "m-jahn"
+
+# options
+top_pubs = 5
+top_proj = 5
+```
+
+## Summary
+
+- 15 years of experience in life science and data science
+- published more than `r get_num_articles(scholar_id)` articles in `r get_num_distinct_journals(scholar_id)` peer-reviewed journals
+- supervised master students, graduate students and junior postdocs
+- build and maintain open source pipelines and software packages (R, python)
+- advocate for open science, transparency and reproducibility - all tools on [github](https://github.com/m-jahn/)
+
+----------
+
+## Publications
+
+```{r, echo = FALSE}
+# retrieve publication stats
+df_pubs <- get_publications(scholar_id)
+```
+
+
+```{r, echo = FALSE, fig.width = 10, fig.height = 2.5}
+# plot cumulative number of publications over time
+plot_sum_pubs <- df_pubs %>% group_by(year) %>%
+  summarize(num_of_pubs = n()) %>%
+  # add missing years
+  complete(year = min(year):max(year)) %>%
+  mutate(num_of_pubs = replace_na(num_of_pubs, 0)) %>%
+  # calculate cumulative sum
+  mutate(cum_sum_of_pubs = cumsum(num_of_pubs)) %>%
+  
+  xyplot(cum_sum_of_pubs ~ year, .,
+    par.settings = theme, lwd = 2, type = c("p", "l"),
+    main = "Cumulative number of publications", 
+    ylab = "", xlab = "",
+    panel = function(x, y, ...) {
+      panel.grid(h = -1, v = -1, col = grey(0.9))
+      panel.xyplot(x, y, ...)
+    }
+  )
+
+
+# plot top X citations
+plot_top_pubs <- df_pubs %>% slice(1:top_pubs) %>%
+  mutate(abbr = author %>% sapply(FUN = function(x) substr(str_split(x, ", ")[[1]][1], 3, 100)) %>% 
+    unname %>% paste0(" et al., ", journal, ", ", year)) %>%
+  mutate(rank = factor(1:top_pubs)) %>%
+  
+  xyplot(rank ~ cites, .,
+    par.settings = theme,
+    groups = rank, lwd = 2,
+    xlim = c(max(df_pubs$cites)*-0.08, max(df_pubs$cites)*1.08),
+    ylim = c(top_pubs+0.5, 0.001),
+    main = paste("Top", top_pubs, "publications by citation"), 
+    ylab = "", xlab = "",
+    panel = function(x, y, ...) {
+      panel.grid(h = -1, v = -1, col = grey(0.9))
+      panel.lollipop(x, y, origin = "left", custom_threshold = 0, ...)
+      panel.text(rep(0, top_pubs), 1:top_pubs-0.5, rev(.[["abbr"]]), pos = 4, 
+        col = theme$superpose.symbol$col[1:top_pubs], cex = 0.75, ...)
+    }
+  )
+
+print(plot_top_pubs, position = c(0, 0, 0.5, 1), more = TRUE)
+print(plot_sum_pubs, position = c(0.5, 0, 1, 1))
+```
+
+----------
+
+## Citations
+
+```{r, echo = FALSE, fig.width = 10, fig.height = 2.5}
+# retrieve citation stats
+df_cites <- get_citation_history(scholar_id) %>%
+  mutate(`cites cumulative` = cumsum(cites))
+
+# plot citations over time
+plot_cites <- df_cites %>%
+  xyplot(cites ~ factor(year), .,
+    par.settings = theme, lwd = 2,
+    main = "Citations per year", 
+    ylab = "", xlab = "",
+    panel = function(x, y, ...) {
+      panel.grid(h = -1, v = -1, col = grey(0.9))
+      panel.barplot(x, y, ...)
+    }
+  )
+
+plot_cites_cum <- df_cites %>%
+  xyplot(`cites cumulative` ~ factor(year), .,
+    par.settings = theme, lwd = 2,
+    main = "Cumulative citations per year", 
+    ylab = "", xlab = "",
+    panel = function(x, y, ...) {
+      panel.grid(h = -1, v = -1, col = grey(0.9))
+      panel.barplot(x, y, fill = "#66A61E", col = "#66A61E", ...)
+    }
+  )
+
+# arrange plots next to each other
+print(plot_cites, position = c(0, 0, 0.5, 1), more = TRUE)
+print(plot_cites_cum, position = c(0.5, 0, 1, 1))
+```
+
+----------
+
+## Projects
+
+<!-- - present most starred and most active packages of last 3 years -->
+
+
+```{r, echo = FALSE}
+# use the 'gh' R package to pull user/project information from github
+gh_repos <- gh("GET /users/{username}/repos", username = github_id)
+
+df_gh_repos <- lapply(gh_repos, FUN = function(x)
+  unlist(x[c("id", "name", "full_name", "html_url", "fork", "size",
+    "stargazers_count", "watchers_count", "has_issues")], recursive = FALSE)) %>%
+  set_names(., lapply(., function(x) x[["name"]])) %>%
+  as.data.frame %>% t %>% as_tibble() %>%
+  type_convert(col_types = cols()) %>%
+  arrange(desc(stargazers_count))
+```
+
+
+```{r, echo = FALSE, fig.width = 10, fig.height = 2.5}
+# plot top X popular projects
+plot_top_proj <- df_gh_repos %>%
+  filter(!fork) %>%
+  slice(1:top_proj) %>%
+  mutate(rank = factor(1:top_proj)) %>%
+  
+  xyplot(rank ~ stargazers_count, .,
+    par.settings = theme,
+    groups = rank, lwd = 2,
+    xlim = max(.[["stargazers_count"]])*c(-0.08, 1.08),
+    ylim = c(top_proj+0.5, 0.001),
+    main = paste("Top", top_proj, "github repos by stars"), 
+    ylab = "", xlab = "",
+    panel = function(x, y, ...) {
+      panel.grid(h = -1, v = -1, col = grey(0.9))
+      panel.lollipop(x, y, origin = "left", custom_threshold = 0, ...)
+      panel.text(rep(0, top_proj), 1:top_proj-0.5, .[["name"]], pos = 4, 
+        col = theme$superpose.symbol$col[1:top_proj], cex = 0.75, ...)
+    }
+  )
+
+#df_gh_repos
+
+
+print(plot_top_proj, position = c(0, 0, 0.5, 1))
+#print(plot_cites_cum, position = c(0.5, 0, 1, 1))
+```
+
+----------
+
+## Packages
+
+- present GH activity as tile plot / heatmap just as on GH home page
+
+----------
+
+## References
+
+This portfolio is an R notebook that automatically retrieves citation and profile data from [Google scholar](https://scholar.google.com/) and [Github](https://github.com/). Retrieval is performed using R packages[scholar](https://github.com/jkeirstead/scholar) and [gh](https://github.com/r-lib/gh).
+The source code is available at https://github.com/m-jahn/CV.
+
