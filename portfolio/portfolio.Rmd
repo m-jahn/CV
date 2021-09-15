@@ -1,12 +1,12 @@
 ---
 title: "Projects and Publications  |  Michael Jahn, PhD"
 output:
-  pdf_document: default
   html_document:
     theme: cosmo
     df_print: paged
   html_notebook:
     theme: cosmo
+  pdf_document: default
 ---
 
 ----------
@@ -151,14 +151,15 @@ print(plot_cites_cum, position = c(0.5, 0, 1, 1))
 
 ----------
 
-## Projects
-
-<!-- - present most starred and most active packages of last 3 years -->
-
+## Projects & Packages
 
 ```{r, echo = FALSE}
-# use the 'gh' R package to pull user/project information from github
+# use the 'gh' R package to pull user/project information from github;
+# use extra options to increase number of fetched events
+# per_page - Results per page (default: 30, max: 100)
+# page - Page number of the results to fetch, default: 1
 gh_repos <- gh("GET /users/{username}/repos", username = github_id)
+gh_events <- gh("GET /users/{username}/events", username = github_id, .limit = 100)
 
 df_gh_repos <- lapply(gh_repos, FUN = function(x)
   unlist(x[c("id", "name", "full_name", "html_url", "fork", "size",
@@ -167,11 +168,17 @@ df_gh_repos <- lapply(gh_repos, FUN = function(x)
   as.data.frame %>% t %>% as_tibble() %>%
   type_convert(col_types = cols()) %>%
   arrange(desc(stargazers_count))
+
+df_gh_events <- lapply(gh_events, FUN = function(x)
+  unlist(x[c("id", "type", "created_at", "public", "repo")], recursive = TRUE)) %>%
+  as.data.frame %>% t %>% as_tibble() %>%
+  type_convert(col_types = cols()) %>%
+  mutate(created_at = as.Date(created_at))
 ```
 
 
 ```{r, echo = FALSE, fig.width = 10, fig.height = 2.5}
-# plot top X popular projects
+# plot top N popular projects by stars
 plot_top_proj <- df_gh_repos %>%
   filter(!fork) %>%
   slice(1:top_proj) %>%
@@ -192,23 +199,35 @@ plot_top_proj <- df_gh_repos %>%
     }
   )
 
-#df_gh_repos
-
-
-print(plot_top_proj, position = c(0, 0, 0.5, 1))
-#print(plot_cites_cum, position = c(0.5, 0, 1, 1))
+# plot time series of GH activity
+plot_commits <- df_gh_events %>%
+  mutate(type = str_remove(type, "Event")) %>%
+  group_by(created_at, repo.name, type) %>%
+  summarize(commits = n(), .groups = "drop") %>%
+  
+  xyplot(commits ~ created_at, .,
+    par.settings = theme, lty = 0, groups = type,
+    horizontal = FALSE, stack = TRUE, ylim = c(0, 6),
+    col = alpha(colorRampPalette(theme$superpose.symbol$col[c(3,2,5)])(8), 0.8),
+    main = "Commit activity of past 3 months", 
+    ylab = "", xlab = "",
+    panel = function(x, y, ...) {
+      panel.grid(h = -1, v = -1, col = grey(0.9))
+      panel.barchart(x, y, box.width = 1, ...)
+      panel.key(..., cex = 0.6, points = FALSE,
+        background = grey(1, 0.7), corner = c(0, 0.9))
+    }
+  )
+  
+print(plot_top_proj, position = c(0, 0, 0.5, 1), more = TRUE)
+print(plot_commits, position = c(0.5, 0, 1, 1))
 ```
 
-----------
-
-## Packages
-
-- present GH activity as tile plot / heatmap just as on GH home page
 
 ----------
 
 ## References
 
-This portfolio is an R notebook that automatically retrieves citation and profile data from [Google scholar](https://scholar.google.com/) and [Github](https://github.com/). Retrieval is performed using R packages[scholar](https://github.com/jkeirstead/scholar) and [gh](https://github.com/r-lib/gh).
+This portfolio is an R notebook that automatically retrieves citation and profile data from [Google scholar](https://scholar.google.com/) and [Github](https://github.com/). Retrieval is performed using R packages [scholar](https://github.com/jkeirstead/scholar) and [gh](https://github.com/r-lib/gh).
 The source code is available at https://github.com/m-jahn/CV.
 
