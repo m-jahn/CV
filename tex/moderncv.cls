@@ -94,6 +94,9 @@
   \renewcommand*{\marvosymbol}[1]{{\fontfamily{mvs}\fontencoding{U}\fontseries{m}\fontshape{n}\selectfont\char#1}}
 %\fi
 
+% this package allows to draw link symbols with '\faExternalLink'
+%\RequirePackage{fontawesome}
+
 % hyper links (hyperref is loaded at the end of the preamble to pass options required by loaded packages such as CJK)
 \RequirePackage{url}
 \urlstyle{tt}
@@ -341,8 +344,8 @@
 % usage: \link[optional text]{link}
 \newcommand*{\link}[2][]{%
   \ifthenelse{\equal{#1}{}}%
-    {\href{#2}{#2}}%
-    {\href{#2}{#1}}}
+    {\href{#2}{\color{color1} #2}}%
+    {\href{#2}{\color{color1} #1}}}
 
 % makes a http hyperlink
 % usage: \httplink[optional text]{link}
