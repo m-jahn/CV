@@ -54,7 +54,7 @@ top_proj = 5
 - published more than `r get_num_articles(scholar_id)` articles in `r get_num_distinct_journals(scholar_id)` peer-reviewed journals
 - supervised master students, graduate students and junior postdocs
 - build and maintain open source pipelines and software packages (R, python)
-- advocate for open science, transparency and reproducibility - all tools on [github](https://github.com/m-jahn/)
+- advocate for open science, transparency and reproducibility - all tools on [Github](https://github.com/m-jahn/)
 
 ----------
 
@@ -161,6 +161,10 @@ print(plot_cites_cum, position = c(0.5, 0, 1, 1))
 gh_repos <- gh("GET /users/{username}/repos", username = github_id)
 gh_events <- gh("GET /users/{username}/events", username = github_id, .limit = 100)
 
+# optionally translate week days to English
+week_days = c(`lör` = "sat", fre = "fri", tor = "thu", ons = "wed",
+  tis = "tue", `mån` = "mon", `sön` = "sun")
+
 df_gh_repos <- lapply(gh_repos, FUN = function(x)
   unlist(x[c("id", "name", "full_name", "html_url", "fork", "size",
     "stargazers_count", "watchers_count", "has_issues")], recursive = FALSE)) %>%
@@ -173,11 +177,17 @@ df_gh_events <- lapply(gh_events, FUN = function(x)
   unlist(x[c("id", "type", "created_at", "public", "repo")], recursive = TRUE)) %>%
   as.data.frame %>% t %>% as_tibble() %>%
   type_convert(col_types = cols()) %>%
-  mutate(created_at = as.Date(created_at))
+  mutate(
+    type = str_remove(type, "Event"),
+    created_at = as.Date(created_at),
+    day = weekdays(created_at, abbreviate = TRUE),
+    day = recode(day, !!!week_days) %>% factor(., unname(week_days)),
+    week = format(created_at, "%W")
+  )
 ```
 
 
-```{r, echo = FALSE, fig.width = 10, fig.height = 2.5}
+```{r, echo = FALSE}
 # plot top N popular projects by stars
 plot_top_proj <- df_gh_repos %>%
   filter(!fork) %>%
@@ -198,10 +208,12 @@ plot_top_proj <- df_gh_repos %>%
         col = theme$superpose.symbol$col[1:top_proj], cex = 0.75, ...)
     }
   )
+```
 
+
+```{r, echo = FALSE, eval = FALSE}
 # plot time series of GH activity
 plot_commits <- df_gh_events %>%
-  mutate(type = str_remove(type, "Event")) %>%
   group_by(created_at, repo.name, type) %>%
   summarize(commits = n(), .groups = "drop") %>%
   
@@ -218,7 +230,35 @@ plot_commits <- df_gh_events %>%
         background = grey(1, 0.7), corner = c(0, 0.9))
     }
   )
+```
+
+
+```{r, echo = FALSE}
+# alternative to last plot is tileplot/levelplot, week vs day as on github
+# plot time series of GH activity
+plot_commits <- df_gh_events %>%
+  group_by(created_at, day, week) %>%
+  summarize(commits = n(), .groups = "drop") %>%
   
+  levelplot(commits ~ factor(week) * day, .,
+    par.settings = theme, cuts = 9,
+    col.regions = alpha(colorRampPalette(theme$superpose.symbol$col[c(3,2)])(10), 0.8),
+    main = "Commit activity of past 3 months", 
+    ylab = "", xlab = "",
+    panel = function(x, y, z, ...) {
+      xnum = as.numeric(x); ynum = as.numeric(y)
+      panel.rect(xleft = min(xnum)-0.5, ybottom = min(ynum)-0.5,
+        xright = max(xnum)+0.5, ytop = max(ynum)+0.5,
+        col = grey(0.9), border = NA)
+      panel.levelplot(x, y, z, ...)
+      panel.abline(h = seq_along(y)-0.5, v = seq_along(x)-0.5,
+        col = "white", lwd = 3)
+    }
+  )
+```
+
+
+```{r, echo = FALSE, fig.width = 10, fig.height = 2.5}
 print(plot_top_proj, position = c(0, 0, 0.5, 1), more = TRUE)
 print(plot_commits, position = c(0.5, 0, 1, 1))
 ```
@@ -229,5 +269,5 @@ print(plot_commits, position = c(0.5, 0, 1, 1))
 ## References
 
 This portfolio is an R notebook that automatically retrieves citation and profile data from [Google scholar](https://scholar.google.com/) and [Github](https://github.com/). Retrieval is performed using R packages [scholar](https://github.com/jkeirstead/scholar) and [gh](https://github.com/r-lib/gh).
-The source code is available at https://github.com/m-jahn/CV.
+The source code is available on [Github](https://github.com/m-jahn/CV).
 
