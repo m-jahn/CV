@@ -1,5 +1,5 @@
 ---
-title: "Projects and Publications  |  Michael Jahn, PhD"
+title: "Data Science Portfolio  |  Michael Jahn, PhD"
 output:
   html_document:
     theme: cosmo
@@ -51,10 +51,10 @@ top_proj = 5
 ## Summary
 
 - 15 years of experience in life science and data science
-- published more than `r get_num_articles(scholar_id)` articles in `r get_num_distinct_journals(scholar_id)` peer-reviewed journals
+- published `r get_num_articles(scholar_id)` articles in `r get_num_distinct_journals(scholar_id)` peer-reviewed journals
 - supervised master students, graduate students and junior postdocs
 - build and maintain open source pipelines and software packages (R, python)
-- advocate for open science, transparency and reproducibility - all tools on [Github](https://github.com/m-jahn/)
+- passionate about open science, transparency and reproducibility
 
 ----------
 
@@ -159,7 +159,9 @@ print(plot_cites_cum, position = c(0.5, 0, 1, 1))
 # per_page - Results per page (default: 30, max: 100)
 # page - Page number of the results to fetch, default: 1
 gh_repos <- gh("GET /users/{username}/repos", username = github_id)
-gh_events <- gh("GET /users/{username}/events", username = github_id, .limit = 100)
+gh_events <- c(
+  gh("GET /users/{username}/events", username = github_id, page = 1, .limit = 100),
+  gh("GET /users/{username}/events", username = github_id, page = 2, .limit = 100))
 
 # optionally translate week days to English
 week_days = c(`lör` = "sat", fre = "fri", tor = "thu", ons = "wed",
@@ -242,7 +244,7 @@ plot_commits <- df_gh_events %>%
   
   levelplot(commits ~ factor(week) * day, .,
     par.settings = theme, cuts = 9,
-    col.regions = alpha(colorRampPalette(theme$superpose.symbol$col[c(3,2)])(10), 0.8),
+    col.regions = alpha(colorRampPalette(c("#ADDB7B", "#66A61E"))(10), 0.8),
     main = "Commit activity of past 3 months", 
     ylab = "", xlab = "",
     panel = function(x, y, z, ...) {
