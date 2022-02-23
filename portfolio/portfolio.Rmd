@@ -68,7 +68,9 @@ df_pubs <- get_publications(scholar_id)
 
 ```{r, echo = FALSE, fig.width = 10, fig.height = 2.5}
 # plot cumulative number of publications over time
-plot_sum_pubs <- df_pubs %>% group_by(year) %>%
+plot_sum_pubs <- df_pubs %>%
+  filter(!is.na(year)) %>%
+  group_by(year) %>%
   summarize(num_of_pubs = n()) %>%
   # add missing years
   complete(year = min(year):max(year)) %>%
@@ -241,8 +243,9 @@ plot_commits <- df_gh_events %>%
 plot_commits <- df_gh_events %>%
   group_by(created_at, day, week) %>%
   summarize(commits = n(), .groups = "drop") %>%
+  ungroup %>% mutate(week = factor(week, unique(week))) %>%
   
-  levelplot(commits ~ factor(week) * day, .,
+  levelplot(commits ~ week * day, .,
     par.settings = theme, cuts = 9,
     col.regions = alpha(colorRampPalette(c("#ADDB7B", "#66A61E"))(10), 0.8),
     main = "Commit activity of past 3 months", 
