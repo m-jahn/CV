@@ -2,7 +2,6 @@
 
 Simple repository for maintaining an up-to-date, lean, and public version of my CV.
 
-
 ### Content
 
 - `docs/` - rendered HTML of my data science [portfolio](https://m-jahn.github.io/CV/portfolio.html)
@@ -11,16 +10,15 @@ Simple repository for maintaining an up-to-date, lean, and public version of my 
 - `portfolio/` - R notebook with recent statistics on publications, citations, and projects
 - `tex/` - the laTex source document(s) for the CV, including styles for `modernCV` theme
 
-
 ### Installation and build
 
 The LaTex installation and `modernCV` theme require the following packages
 
-``` bash
+```bash
 sudo apt install texlive-base texlive-binaries texlive-fonts-recommended texlive-latex-base texlive-latex-recommended texlive-latex-extra
 ```
-I recommend Rstudio or Texmaker as simple IDEs.
 
+I recommend Rstudio or Texmaker as simple IDEs.
 
 ### Data science 'portfolio'
 
