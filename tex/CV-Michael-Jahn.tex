@@ -1,6 +1,8 @@
 % REQUIRED PACKAGES    -------------------------------------------------------------------------
 %
+% +++
 %
+% Install with: sudo apt install ...
 % texlive-latex-base
 % texlive-latex-recommended
 % texlive-latex-extra
@@ -8,11 +10,19 @@
 % texlive-fonts-extra
 % cm-super
 %
+% +++
+%
+% Install other missing packages using: tlmgr install pdflatex
+%
+% +++
+%
+% Render document: cd tex; pdflatex CV-Michael-Jahn-short.tex
 %
 %%  FORMAT     ---------------------------------------------------------------------------------
-\documentclass[11pt, a4paper, sans, blue]{moderncv}
-\moderncvstyle{casual} % CV theme: 'casual', 'classic', 'oldstyle', 'banking'
-\moderncvcolor{green}
+\documentclass[10pt, a4paper, sans]{moderncv}
+\moderncvcolor{green} % 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' 'red'
+\moderncvstyle{casual} % 'casual', 'classic', 'oldstyle', 'banking'
+\RequirePackage[sfdefault,light]{roboto}
 
 %%  INFO       ---------------------------------------------------------------------------------
 \firstname{Michael}
