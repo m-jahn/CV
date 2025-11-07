@@ -15,7 +15,7 @@
 % Render document: cd tex; pdflatex CV-Michael-Jahn-short.tex
 %
 %%  FORMAT     ---------------------------------------------------------------------------------
-\documentclass[11pt, a4paper, sans, blue]{moderncv}
+\documentclass[10pt, a4paper, sans, blue]{moderncv}
 \moderncvstyle{casual} % CV theme: 'casual', 'classic', 'oldstyle', 'banking'
 \moderncvcolor{green}
 
@@ -23,22 +23,13 @@
 \firstname{Michael}
 \familyname{Jahn}
 \title{Curriculum vitae}
-\address{Street name, number}{ZIP code City, Country}
-\mobile{+49\,123\,456789}
-%\phone{}
-\email{jahn$@$email.de}
-\photo[0.15\textwidth]{../figures/profile_2020.png}
-
+% \email{jahn$@$email.de}
+% \photo[0.15\textwidth]{../figures/profile_2020.png}
 
 
 \begin{document}
 
-%%  OPTIONAL COVERLETTER    ---------------------------------------------------------------------
-% \input{coverletter.tex}
-
 \newpage
-
-%%  ENTRIES     ---------------------------------------------------------------------------------
 
 \maketitle
 
@@ -52,32 +43,25 @@
 
 
 \section{Current position}
-\cvitem{}{\textbf{Staff scientist}, Bioinformatics Platform, Laboratory of Emmanuelle Charpentier, Max-Planck-Unit for the Science of Pathogens (MPUSP), Berlin.}
-
-
-\section{Education}
-\cventry{July 10, 2015}{Graduated \textit{Doctor rerum naturalium}}{}{ at the University of Leipzig, Germany, with \textit{summa cum laude} (1.0)}{}{}
-\cventry{2011--2015}{PhD studies}{}{Group of Prof Susann Müller, Dept. Environmental Microbiology, Helmholtz-Centre for Environmental Research, Leipzig.}{}{}
-\cventry{2005--2011}{Diploma studies, biology}{}{Dresden University of Technology (TUD), main subjects: genetics, biochemistry, immunology.}{}{}
+\cventry{8/2022--now}{Staff scientist}{}{Bioinformatics Platform, Laboratory of Emmanuelle Charpentier, Max-Planck-Unit for the Science of Pathogens (MPUSP), Berlin}{}{}
 
 
 \section{Work}
-\cventry{8/2022--now}{Staff scientist}{}{Bioinformatics Platform, Laboratory of Emmanuelle Charpentier, Max-Planck-Unit for the Science of Pathogens (MPUSP), Berlin}{}{}
 \cventry{5/2016--5/2022}{Postdoctoral scientist}{}{System-wide analysis and metabolic engineering of autotrophic bacteria in the group of Prof Paul Hudson, Science For Life Laboratory - Royal Institute of Technology, Stockholm}{}{}
 \cventry{8--12/2009}{Erasmus internship}{}{Center of Excellence in Evolutionary Genetics and Physiology at the group of Prof Mikko Nikinmaa, Dept. of Biology, University of Turku, Finland}{}{}
-\cventry{2007--2009}{Student assistant}{}{Institute of Genetics at TU Dresden, Mitteldeutscher Praxisverbund Humangenetik Dresden}{}{}
 
 
-\section{Awards}
-\cvitem{Nov 25, 2015}{\textbf{PhD-Award} 2015 by the Helmholtz-Centre for Environmental Research, Leipzig. Awarded annually for excellent dissertations.}
+\section{Education}
+\cventry{2011--2015}{PhD studies}{}{Group of Prof Susann Müller, Dept. Environmental Microbiology, Helmholtz-Centre for Environmental Research, Leipzig}{}{}
+\cventry{2005--2011}{Diploma studies, biology}{}{Dresden University of Technology (TUD), main subjects: genetics, biochemistry, immunology}{}{}
 
 
 \section{Roles and Qualifications}
 \cvitem{Roles}{Approved project manager for genetic works (\S ~14,15 GenTSV), 2015-2025.}
 \cvitem{}{Data protection officer, from 2025.}
-\cvitem{}{Active peer reviewer for Microbial Cell Factories, Frontiers in Microbiology, PLOS Comp Bio, etc.}
-\cvitem{}{Member of the \link[Snakemake]{https://github.com/snakemake} organization, contributor and co-author of Snakemake workflow catalog and other projects.}
-\cvitem{Programming languages}{Python, R, Snakemake, Linux bash, Markdown, Latex, Git}
+\cvitem{}{Active peer reviewer for Microbial Cell Factories, Frontiers, PLOS Comp Bio, etc.}
+\cvitem{}{Member of the \link[Snakemake]{https://github.com/snakemake} organization, contributor and co-author.}
+\cvitem{Programming}{Fluent in Python, R, Snakemake, Linux bash, Markdown, Latex, Git}
 \cvitem{Software}{
 	\link[WeightedTreemaps]{https://github.com/m-jahn/WeightedTreemaps},
 	\link[ShinyProt]{https://m-jahn.shinyapps.io/ShinyProt/},
@@ -89,27 +73,24 @@
 	\link[snakemake-workflow-template]{https://github.com/mpusp/snakemake-workflow-template},
 	\link[nf-core-crispriscreen]{https://github.com/MPUSP/nf-core-crispriscreen}
 }
-\cvitem{Languages}{Proficient user in German, English and Swedish}
+\cvitem{Languages}{Fluent in German, English and Swedish}
 
 
 \section{Top 5 Publications}
-%
-% template:
-%\cvitem{\listitemsymbol}{\textbf{Jahn M}, Name N. \textit{title}. Journal, \textbf{year}. \link[Link]{}.}
 
-\cvitem{\listitemsymbol}{\textbf{Jahn M}, Crang, N., Gynnå, A. H., Kabova, D., Frielingsdorf, S., Lenz, O., Charpentier, E., Hudson, E. P.. \textit{The energy metabolism of Cupriavidus necator in different trophic conditions}. Applied and Environmental Microbiology, \textbf{2024}.
+\cvitem{\listitemsymbol}{\textbf{Jahn M} et al., \textit{The energy metabolism of Cupriavidus necator in different trophic conditions}. Applied and Environmental Microbiology, \textbf{2024}.
 \link[Link]{https://doi.org/10.1128/aem.00748-24}.}
 
-\cvitem{\listitemsymbol}{\underline{Miao R, \textbf{Jahn M}}, Shabestary K, Peltier G, Hudson EP. \textit{CRISPR interference screens reveal growth–robustness tradeoffs in Synechocystis sp. PCC 6803 across growth conditions}. The Plant Cell, \textbf{2023}.
+\cvitem{\listitemsymbol}{\underline{Miao R, \textbf{Jahn M}} et al., \textit{CRISPR interference screens reveal growth–robustness tradeoffs in Synechocystis sp. PCC 6803 across growth conditions}. The Plant Cell, \textbf{2023}.
 \link[Link]{https://doi.org/10.1093/plcell/koad208}.}
 
-\cvitem{\listitemsymbol}{\textbf{Jahn M}, Crang N, Janasch M, Hober A, Forsström B, Kimler K, Mattausch A, Chen Q, Asplund-Samuelsson J, Hudson EP.  \textit{Protein allocation and utilization in the versatile chemolithoautotroph Cupriavidus necator}, eLife, 10, \textbf{2021}.
+\cvitem{\listitemsymbol}{\textbf{Jahn M} et al., \textit{Protein allocation and utilization in the versatile chemolithoautotroph Cupriavidus necator}, eLife, 10, \textbf{2021}.
 \link[Link]{https://elifesciences.org/articles/69019}.}
 
-\cvitem{\listitemsymbol}{Yao L, Shabestary K, Björk SM, Asplund-Samuelsson J, Joensson HN, \textbf{Jahn M}, Hudson EP. \textit{Pooled CRISPRi screening of the cyanobacterium Synechocystis sp PCC 6803 for enhanced industrial phenotypes}. Nature Communications, \textbf{2020}.
+\cvitem{\listitemsymbol}{Yao L et al., \textbf{Jahn M}, Hudson EP. \textit{Pooled CRISPRi screening of the cyanobacterium Synechocystis sp PCC 6803 for enhanced industrial phenotypes}. Nature Communications, \textbf{2020}.
 \link[Link]{https://www.nature.com/articles/s41467-020-15491-7}.}
 
-\cvitem{\listitemsymbol}{\textbf{Jahn M}, Vialas V, Karlsen J, Maddalo G, Edfors F, Forsström B, Uhlén M, Käll L, Hudson EP. \textit{Growth of Cyanobacteria Is Constrained by the Abundance of Light and Carbon Assimilation Proteins}. Cell Reports 25, 478–486.e8., \textbf{2018}.
+\cvitem{\listitemsymbol}{\textbf{Jahn M} et al., \textit{Growth of Cyanobacteria Is Constrained by the Abundance of Light and Carbon Assimilation Proteins}. Cell Reports 25, 478–486.e8., \textbf{2018}.
 \link[Link]{https://linkinghub.elsevier.com/retrieve/pii/S2211124718314852}.}
 
 \end{document}
