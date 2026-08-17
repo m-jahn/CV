@@ -140,10 +140,7 @@ print(plot_cites_cum, vp = grid::viewport(x = 0.75, y = 0.5, width = 0.5, height
 # per_page - Results per page (default: 30, max: 100)
 # page - Page number of the results to fetch, default: 1
 gh_repos <- gh("GET /users/{username}/repos", username = github_id, page = 1, .limit = 100)
-gh_events <- c(
-  gh("GET /users/{username}/events", username = github_id, page = 1, .limit = 100),
-  gh("GET /users/{username}/events", username = github_id, page = 2, .limit = 100)
-)
+gh_events <- gh("GET /users/{username}/events", username = github_id, .limit = 100)
 
 df_gh_repos <- lapply(gh_repos, FUN = function(x) {
   unlist(x[c(
@@ -171,6 +168,8 @@ df_gh_events <- lapply(gh_events, FUN = function(x) {
     day = weekdays(created_at, abbreviate = TRUE),
     week = format(created_at, "%W")
   )
+
+weekdays <- c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
 ```
 
 
@@ -218,9 +217,9 @@ plot_commits <- df_gh_events %>%
   summarize(commits = n(), .groups = "drop") %>%
   ungroup() %>%
   mutate(week = factor(week, seq(min(week), max(week)))) %>%
-  complete(day = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"), week) %>%
+  complete(day = weekdays, week) %>%
   mutate(commits = replace(commits, commits > 5, 5)) %>%
-  ggplot(aes(x = week, y = day, fill = commits)) +
+  ggplot(aes(x = week, y = factor(day, levels = rev(weekdays)), fill = commits)) +
   geom_tile(color = "white", linewidth = 0.8) +
   guides(fill = guide_colorbar(title = NULL, barwidth = 0.5)) +
   scale_fill_gradientn(colors = colorRampPalette(c("#ADDB7B", "#66A61E"))(10), limits = c(1, 5), na.value = "grey90") +
