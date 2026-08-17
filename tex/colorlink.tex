@@ -1,0 +1,10 @@
+% Colored link that follows moderncv theme color (color1)
+\newcommand{\colorlink}[2][]{%
+  \href{#2}{\textcolor{color1}{%
+    \if\relax\detokenize{#1}\relax
+      \nolinkurl{#2}%
+    \else
+      #1%
+    \fi
+  }}%
+}
