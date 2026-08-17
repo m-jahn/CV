@@ -1,0 +1,18 @@
+[workspace]
+authors = ["m-jahn <jahn@mpusp.mpg.de>"]
+channels = ["conda-forge", "bioconda"]
+name = "CV"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+make-cv = {cmd = "pdflatex -output-directory=tex tex/CV-Michael-Jahn.tex"}
+make-cv-short = {cmd = "pdflatex -output-directory=tex tex/CV-Michael-Jahn-short.tex"}
+make-cv-german = {cmd = "pdflatex -output-directory=tex tex/CV-Michael-Jahn_DE.tex"}
+make-portfolio = {cmd = "Rscript -e 'rmarkdown::render(\"portfolio/portfolio.Rmd\")'"}
+
+[dependencies]
+r-tidyverse = ">=2.0.0,<3"
+r-gh = ">=1.6.1,<2"
+r-scholar = ">=1.0.0,<2"
+r-rmarkdown = ">=2.31,<3"
