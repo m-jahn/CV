@@ -1,28 +1,9 @@
-% REQUIRED PACKAGES    -------------------------------------------------------------------------
-%
-% +++
-%
-% Install with: sudo apt install ...
-% texlive-latex-base
-% texlive-latex-recommended
-% texlive-latex-extra
-% texlive-fonts-recommended
-% texlive-fonts-extra
-% cm-super
-%
-% +++
-%
-% Install other missing packages using: tlmgr install pdflatex
-%
-% +++
-%
-% Render document: cd tex; pdflatex CV-Michael-Jahn-short.tex
-%
 %%  FORMAT     ---------------------------------------------------------------------------------
 \documentclass[10pt, a4paper, sans]{moderncv}
-\moderncvcolor{green} % 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' 'red'
+\moderncvcolor{blue} % 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' 'red'
 \moderncvstyle{casual} % 'casual', 'classic', 'oldstyle', 'banking'
 \RequirePackage[sfdefault,light]{roboto}
+\input{colorlink.tex} % new option colorlink using default color
 
 %%  INFO       ---------------------------------------------------------------------------------
 \firstname{Michael}
@@ -32,7 +13,6 @@
 \mobile{+49\,123\,456789}
 \email{jahn$@$email.de}
 \photo[0.25\textwidth]{../figures/profile_2020.png}
-
 
 
 \begin{document}
@@ -62,18 +42,19 @@
 
 
 \section{Previous positions}
-\cventry{5/2016--5/2022}{Postdoctoral scientist}{}{System-wide analysis and metabolic engineering of autotrophic bacteria in the group of Prof Paul Hudson, Science For Life Laboratory - Royal Institute of Technology, Stockholm}{}{}
-\cventry{8--12/2009}{Erasmus internship}{}{Center of Excellence in Evolutionary Genetics and Physiology at the group of Prof Mikko Nikinmaa, Dept. of Biology, University of Turku, Finland}{}{}
-\cventry{2008--2009}{Student assistant}{}{Institute of Genetics}{group of Prof Gerhard Rödel, Dept. of Biology, Dresden University of Technology (TUD)}{}
+\cventry{5/2016--5/2022}{Postdoctoral scientist}{}{Systems biology and metabolic engineering of autotrophic bacteria (Prof Paul Hudson), Science For Life Laboratory - Royal Institute of Technology, Stockholm, Sweden}{}{}
+\cventry{8--12/2009}{Erasmus internship}{}{Center of Excellence in Evolutionary Genetics and Physiology (Prof Mikko Nikinmaa), Dept. of Biology, University of Turku, Finland}{}{}
+\cventry{2008--2009}{Student assistant}{}{Institute of Genetics (Prof Gerhard Rödel), Dept. of Biology, Dresden University of Technology (TUD)}{}{}
 \cventry{2007--2008}{Student assistant}{}{Mitteldeutscher Praxisverbund Humangenetik, Dresden}{}{}
 \cventry{2004--2005}{Voluntary service 'Freiwilliges Ökologisches Jahr'}{}{national park 'Sächsische Schweiz'}{tour guide and education}{}
 
+\newpage
 
 \section{Education}
 \cventry{July 10, 2015}{Graduated \textit{Doctor rerum naturalium}}{}{ at the University of Leipzig, Germany, with \textit{summa cum laude} (1.0)}{}{}
-\cventry{2011--2015}{PhD studies}{}{Group of Prof Susann Müller, Dept. Environmental Microbiology, Helmholtz-Centre for Environmental Research, Leipzig. \newline
+\cventry{2011--2015}{PhD studies}{}{Group of Prof Susann Müller, Dept. Environmental Microbiology, Helmholtz-Centre for Environmental Research, Leipzig.
 	Thesis: 'Characterization of population heterogeneity in a model biotechnological process using \textit{Pseudomonas putida}'}{}{}
-\cventry{2005--2011}{Diploma studies, biology}{}{Dresden University of Technology (TUD), main subjects: genetics, biochemistry, immunology. \newline
+\cventry{2005--2011}{Diploma studies, biology}{}{Dresden University of Technology (TUD), main subjects: genetics, biochemistry, immunology.
 	Diploma thesis: 'Dynamic mating pheromone gradients for induction of mating projection and fluorescence in yeast', group of Prof Gerhard Rödel, grade 1.2}{}{}
 \cventry{1996--2004}{High school}{}{Romain-Rolland-Gymnasium, Dresden}{Abitur with grade 1.6}{}{}
 % \cventry{1992--1996}{Elementary school}{}{Dresden}{}{}
@@ -89,8 +70,10 @@
 
 
 \section{Awarded grants}
-\cvitem{Nov 11, 2019}{\textbf{Investigation of protein resource allocation in the model CO\textsubscript{2} fixing bacterium \textit{Ralstonia eutropha}} (Swedish: Undersökning av proteiners resursfördelning i en modell för CO\textsubscript{2}-fixerande bakterier, \textit{Ralstonia eutropha}). \newline
-Funding agency: FORMAS. Project number: 2019-01491. Project leader: Dr. Michael Jahn. Awarded funding for period 2020-01-01-2021-12-31. Total funds: 2,000,000 SEK (200,000 Euro).}
+\cvitem{Nov 11, 2019}{\textbf{Investigation of protein resource allocation in the model CO\textsubscript{2} fixing bacterium \textit{Ralstonia eutropha}}.
+Funding agency: FORMAS (Sweden). Project number: 2019-01491.
+Awarded funding for period 2020-01-01-2021-12-31.
+Total funds: 2,000,000 SEK (200,000 Euro).}
 
 
 %\section{Grant proposals}
@@ -101,42 +84,41 @@ Funding agency: FORMAS. Project number: 2019-01491. Project leader: Dr. Michael 
 
 
 \section{Teaching and supervision}
-\cvitem{Teaching}{\textbf{Lecture for course QMB6 "Quantitative microbiology"}, at the Humboldt-University Berlin. 2022-2025. Topic: Functional Genomics, CRISPR screening.}
-\cvitem{}{\textbf{Lecture for course KE2130 'Renewable fuels'}, at KTH Stockholm, 2020-2022. Topics: Metabolic engineering, whole cell biocatalysis, genome-scale models, flux balance analysis.}
+\cvitem{Teaching}{\textbf{Course 'Coding for Biologists'}, 10 units, introduction to Python and R for MPUSP employees, 2026.}
+\cvitem{}{\textbf{Lecture for course QMB6 'Quantitative microbiology'}, at the Humboldt-University Berlin. 2023-2026. Topic: Functional Genomics, CRISPR screening.}
+\cvitem{}{\textbf{Lecture for course KE2130 'Renewable fuels'}, at KTH Stockholm, 2020-2022. Topics: Metabolic engineering, biocatalysis, metabolic modeling.}
 \cvitem{}{\textbf{Lecture for course 'Introduction to the programming language R'} and its application for flow cytometry data, at the Helmholtz Centre for Environmental Research, Leipzig, 2015.}
-\cvitem{PhD council}{Member of the PhD council and the Environmental Board of the Helmholtz Centre for Environmental Research, Leipzig, 2011-2015. Tasks: Improving environmental footprint of the center, providing guidance for starting PhD students, organizing events.}
+\cvitem{PhD council}{Member of the PhD council and the Environmental Board of the Helmholtz Centre for Environmental Research, Leipzig, 2011-2015.}
 \cvitem{Supervision}{Supervised master and intern students during PhD and postdoctoral studies}
 
 
 \section{Qualifications and skills}
 \cvitem{Expertise}{
-	Analytical thinking, understanding complex phenomena, \newline
-	Project managing, supervision, leadership, \newline
-	Scientific writing of papers, funding proposals, reports, \newline
-	Design of experimental strategies to solve a problem, \newline
-	Explorative analysis and visualization of complex (biological) data, \newline
-	Creation of pipelines for automated data processing, \newline
-	Application of clustering and machine learning algorithms, \newline
 	High-throughput lab methods (NGS, protein mass spectrometry)
+	Creation of pipelines for automated data processing, \newline
+	Analysis and visualization of complex data, \newline
+	Application of clustering and machine learning algorithms, \newline
+	Project management, supervision, leadership, \newline
+	Scientific writing of papers, funding proposals, reports, \newline
 }
 \cvitem{Programming languages}{Fluent in Python, R, Snakemake, Linux bash, Markdown, Latex, Git}
 \cvitem{Authored software}{
-	\link[WeightedTreemaps]{https://github.com/m-jahn/WeightedTreemaps},
-	\link[ShinyProt]{https://m-jahn.shinyapps.io/ShinyProt/},
-	\link[ShinyLib]{https://m-jahn.shinyapps.io/ShinyLib/},
-	\link[fluctuator]{https://github.com/m-jahn/fluctuator}
-	\link[snakemake-workflow-catalog]{https://github.com/snakemake/snakemake-workflow-catalog},
-	\link[snakemake-crispr-guides]{https://github.com/mpusp/snakemake-crispr-guides},
-	\link[snakemake-simple-mapping]{https://github.com/mpusp/snakemake-simple-mapping},
-	\link[snakemake-workflow-template]{https://github.com/mpusp/snakemake-workflow-template},
-	\link[nf-core-crispriscreen]{https://github.com/MPUSP/nf-core-crispriscreen}
+	\colorlink[snakemake-workflow-catalog]{https://github.com/snakemake/snakemake-workflow-catalog},
+	\colorlink[snakemake-crispr-guides]{https://github.com/mpusp/snakemake-crispr-guides},
+	\colorlink[snakemake-simple-mapping]{https://github.com/mpusp/snakemake-simple-mapping},
+	\colorlink[snakemake-ont-basecalling]{https://github.com/mpusp/snakemake-ont-basecalling},
+	\colorlink[nf-core-crispriscreen]{https://github.com/MPUSP/nf-core-crispriscreen},
+	\colorlink[WeightedTreemaps]{https://github.com/m-jahn/WeightedTreemaps},
+	\colorlink[ShinyProt]{https://m-jahn.shinyapps.io/ShinyProt/},
+	\colorlink[ShinyLib]{https://m-jahn.shinyapps.io/ShinyLib/},
+	\colorlink[fluctuator]{https://github.com/m-jahn/fluctuator}
 }
-\cvitem{Metabolic models}{
-	\link[Resource allocation model]{https://github.com/m-jahn/cell-economy-model} for \textit{Synechocystis} sp.\newline
-	\link[Genome scale metabolic model (python)]{https://github.com/m-jahn/genome-scale-models} for \textit{Cupriavidus necator}.\newline
-	\link[Resource balance analysis model (python)]{https://github.com/m-jahn/genome-scale-models} for \textit{Cupriavidus necator}.
-}
-\cvitem{Certificates}{Approved project manager for genetic works (\S ~14,15 GenTSV), 2015-2025.}
+% \cvitem{Metabolic models}{
+% 	\link[Resource allocation model]{https://github.com/m-jahn/cell-economy-model} for \textit{Synechocystis} sp.\newline
+% 	\link[Genome scale metabolic model (python)]{https://github.com/m-jahn/genome-scale-models} for \textit{Cupriavidus necator}.\newline
+% 	\link[Resource balance analysis model (python)]{https://github.com/m-jahn/genome-scale-models} for \textit{Cupriavidus necator}.
+% }
+\cvitem{Certificates}{Approved project manager for genetic works (\S ~14,15 GenTSV), 2015, refresher 2024, 2026.}
 
 
 \section{Peer review and outreach}
@@ -151,99 +133,45 @@ Funding agency: FORMAS. Project number: 2019-01491. Project leader: Dr. Michael 
 \cvitem{Swedish}{Fluent, CEF level B2}
 
 
-% \newpage
+\newpage
 
 
-\section{Publications}
+\section{Selected publications}
 %
 % template:
 %\cvitem{\listitemsymbol}{\textbf{Jahn M}, Name N. \textit{title}. Journal, \textbf{year}. \link[Link]{}.}
+
+\cvitem{\listitemsymbol}{Cornejo FA, Driller K, Ahmed-Begrich R, Schmidt K, \textbf{Jahn M}, Shanmuganathan V, Hahnke K, Kondrot F, Wulff TF, Rämisch S, Alagesan K, Charpentier E, Turgay K. \textit{Stress-induced ribosome degradation in Bacillus subtilis is mediated by the RNase Y-specificity complex}. Nature Communications, \textbf{2026}.
+\colorlink[Link]{https://doi.org/10.1038/s41467-026-73310-x}.}
+
 \cvitem{\listitemsymbol}{Wulff TF, Ahmed-Begrich R, Hahnke K, \textbf{Jahn M}, Charpentier E. \textit{Novel assembly of the SF370 strain of the important human pathogen Streptococcus pyogenes serotype M1}. Microbiology Resource Announcements, \textbf{2025}.
-\link[Link]{https://doi.org/10.1128/mra.01197-24}.}
+\colorlink[Link]{https://doi.org/10.1128/mra.01197-24}.}
 
 \cvitem{\listitemsymbol}{\textbf{Jahn M}, Crang, N., Gynnå, A. H., Kabova, D., Frielingsdorf, S., Lenz, O., Charpentier, E., Hudson, E. P.. \textit{The energy metabolism of Cupriavidus necator in different trophic conditions}. Applied and Environmental Microbiology, \textbf{2024}.
-\link[Link]{https://doi.org/10.1128/aem.00748-24}.}
+\colorlink[Link]{https://doi.org/10.1128/aem.00748-24}.}
 
 \cvitem{\listitemsymbol}{\underline{Miao R, \textbf{Jahn M}}, Shabestary K, Peltier G, Hudson EP. \textit{CRISPR interference screens reveal growth–robustness tradeoffs in Synechocystis sp. PCC 6803 across growth conditions}. The Plant Cell, \textbf{2023}.
-\link[Link]{https://doi.org/10.1093/plcell/koad208}.}
-
-\cvitem{\listitemsymbol}{Grätz L, Kowalski-Jahn M, Scharf MM, Kozielewicz P, \textbf{Jahn M}, Bous J, Lambert NA, Gloriam DE, Schulte G. \textit{Pathway selectivity in Frizzleds is achieved by conserved micro-switches defining pathway-determining, active conformations}. Nature Communications, \textbf{2023}.
-\link[Link]{https://doi.org/10.1038/s41467-023-40213-0}.}
-
-\cvitem{\listitemsymbol}{Janasch M, Crang N, Asplund-Samuelsson J, Sporre E, Bruch M, Gynnå A, \textbf{Jahn M}, Hudson EP. \textit{Thermodynamic limitations of PHB production from formate and fructose in Cupriavidus necator}.  Metabolic engineering, \textbf{2022}.
-\link[Link]{https://doi.org/10.1016/j.ymben.2022.08.005}.}
+\colorlink[Link]{https://doi.org/10.1093/plcell/koad208}.}
 
 \cvitem{\listitemsymbol}{\textbf{Jahn M}, Crang N, Janasch M, Hober A, Forsström B, Kimler K, Mattausch A, Chen Q, Asplund-Samuelsson J, Hudson EP.  \textit{Protein allocation and utilization in the versatile chemolithoautotroph Cupriavidus necator}, eLife, 10, \textbf{2021}.
-\link[Link]{https://elifesciences.org/articles/69019}.}
-
-\cvitem{\listitemsymbol}{Karlsen J, Asplund-Samuelsson J, \textbf{Jahn M}, Vitay D, Hudson EP. \textit{Slow Protein Turnover Explains Limited Protein-Level Response to Diurnal Transcriptional Oscillations in Cyanobacteria}. Frontiers in Microbiology, 12, 820, \textbf{2021}.
-\link[Link]{https://doi.org/10.3389/fmicb.2021.657379}.}
+\colorlink[Link]{https://elifesciences.org/articles/69019}.}
 
 \cvitem{\listitemsymbol}{Yao L, Shabestary K, Björk SM, Asplund-Samuelsson J, Joensson HN, \textbf{Jahn M}, Hudson EP. \textit{Pooled CRISPRi screening of the cyanobacterium Synechocystis sp PCC 6803 for enhanced industrial phenotypes}. Nature Communications, \textbf{2020}.
-\link[Link]{https://www.nature.com/articles/s41467-020-15491-7}.}
-
-\cvitem{\listitemsymbol}{Karlsen J, Asplund-Samuelsson J, Thomas Q, \textbf{Jahn M}, Hudson EP. \textit{Ribosome Profiling of Synechocystis Reveals Altered Ribosome Allocation at Carbon Starvation}. MSystems 3, e00126-18, \textbf{2018}.
-\link[Link]{https://msystems.asm.org/content/3/5/e00126-18}.}
+\colorlink[Link]{https://www.nature.com/articles/s41467-020-15491-7}.}
 
 \cvitem{\listitemsymbol}{\textbf{Jahn M}, Vialas V, Karlsen J, Maddalo G, Edfors F, Forsström B, Uhlén M, Käll L, Hudson EP. \textit{Growth of Cyanobacteria Is Constrained by the Abundance of Light and Carbon Assimilation Proteins}. Cell Reports 25, 478–486.e8., \textbf{2018}.
-\link[Link]{https://linkinghub.elsevier.com/retrieve/pii/S2211124718314852}.}
-
-\cvitem{\listitemsymbol}{Shabestary K, Anfelt J, Ljungqvist E, \textbf{Jahn M}, Yao L, Hudson EP. \textit{Targeted Repression of Essential Genes To Arrest Growth and Increase Carbon Partitioning and Biofuel Titers in Cyanobacteria}. ACS Synthetic Biology, 7, 1669–1675, \textbf{2018}.
-\link[Link]{https://pubs.acs.org/doi/10.1021/acssynbio.8b00056}.}
+\colorlink[Link]{https://linkinghub.elsevier.com/retrieve/pii/S2211124718314852}.}
 
 \cvitem{\listitemsymbol}{\textbf{Jahn M}, Vorpahl C, Hübschmann T, Harms H, Müller S. \textit{Copy number variability of expression plasmids determined by cell sorting and Droplet Digital PCR}.  Microbial Cell Factories, \textbf{2016}.
-\link[Link]{http://microbialcellfactories.biomedcentral.com/articles/10.1186/s12934-016-0610-8}.}
-
-\cvitem{\listitemsymbol}{Lindmeyer M, \textbf{Jahn M}, Vorpahl C, Müller S, Schmid A, Bühler B. \textit{Variability in subpopulation formation propagates into biocatalytic variability of engineered Pseudomonas putida strains}.  Frontiers in microbiology 6, \textbf{2015}.
-\link[Link]{http://journal.frontiersin.org/article/10.3389/fmicb.2015.01042}.}
-
-\cvitem{\listitemsymbol}{Lieder S, \textbf{Jahn M}, Koepff J, Müller S, Takors Ralf. \textit{Environmental stress speeds up DNA replication in Pseudomonas putida in chemostat cultivations}.  Biotechnology journal, \textbf{2015}.
-\link[Link]{http://doi.wiley.com/10.1002/biot.201500059}.}
+\colorlink[Link]{http://microbialcellfactories.biomedcentral.com/articles/10.1186/s12934-016-0610-8}.}
 
 \cvitem{\listitemsymbol}{\textbf{Jahn M}, Günther S, Müller S. \textit{Non-random distribution of macromolecules as driving forces for phenotypic variation}. Current Opinion in Microbiology. 25:49-55, \textbf{2015}.
-\link[Link]{https://doi.org/10.1016/j.mib.2015.04.005}.}
-
-\cvitem{\listitemsymbol}{Rödiger S, Burdukiewicz M, Blagodatskikh K, \textbf{Jahn M}, Schierack P. \textit{R as an environment for reproducible analysis of DNA amplification experiments}. R Journal 7/1:127-150, \textbf{2015}.
-\link[Link]{https://journal.r-project.org/archive/2015/RJ-2015-011/RJ-2015-011.pdf}.}
+\colorlink[Link]{https://doi.org/10.1016/j.mib.2015.04.005}.}
 
 \cvitem{\listitemsymbol}{\textbf{Jahn M}, Vorpahl C, Türkowsky D, Lindmeyer M, Bühler B, Harms H, Müller S. \textit{Accurate determination of plasmid copy number of flow-sorted cells using droplet digital PCR}. Analytical Chemistry 86:5969-76, \textbf{2014}.
-\link[Link]{https://pubs.acs.org/doi/10.1021/ac501118v}.}
-
-\cvitem{\listitemsymbol}{Lieder S, \textbf{Jahn M}, Seifert J, von Bergen M, Müller S, Takors R. \textit{Subpopulation-proteomics reveal growth rate, but not cell cycling, as a major impact on protein composition in} Pseudomonas putida \textit{KT2440}. AMB Express 4:71, \textbf{2014}.
-\link[Link]{http://www.amb-express.com/content/4/1/71}.}
+\colorlink[Link]{https://pubs.acs.org/doi/10.1021/ac501118v}.}
 
 \cvitem{\listitemsymbol}{\textbf{Jahn M}, Seifert J, von Bergen M, Schmid A, Bühler B, Müller S. \textit{Subpopulation-proteomics in prokaryotic populations}. Current Opinion in Biotechnology 24:79-87, \textbf{2013}.
-\link[Link]{https://linkinghub.elsevier.com/retrieve/pii/S0958166912001723}.}
-
-\cvitem{\listitemsymbol}{\textbf{Jahn M}, Seifert J, Hübschmann T, von Bergen M, Harms H, Müller S. \textit{Comparison of preservation methods for bacterial cells in cytomics and proteomics}. Journal Of Integrated Omics 3:1-9, \textbf{2013}.
-\link[Link]{https://www.jiomics.com/index.php/jiomics/article/view/77}.}
-
-\cvitem{\listitemsymbol}{\textbf{Jahn M}, Mölle A, Rödel G, Ostermann K. \textit{Temporal and spatial properties of a yeast multi-cellular amplification system based on signal molecule diffusion}. Sensors 13:14511-22, \textbf{2013}.
-\link[Link]{https://www.mdpi.com/1424-8220/13/11/14511}.}
-
-%\section{Conference contributions}
-%
-%\cvitem{Sep 07--09, 2020}{\textbf{11EWBC} - 11th European workshop on the biology of cyanobacteria, Porto, Portugal (changed to virtual format). Oral presentation.}
-%
-%\cvitem{May 22--24, 2019}{\textbf{NPC 14} - Nordic congress on photosynthesis, Turku, Finland. Short oral presentation.}
-%
-%\cvitem{Oct 24--26, 2018}{\textbf{4th Applied Synthetic Biology meeting} - Toulouse, France. Oral presentation.}
-%
-%\cvitem{Jul 20--22, 2015}{\textbf{Single Cell VI} -- 6\textsuperscript{th} International Conference on Analysis of Microbial Cells at the Single Cell Level, Retz (Austria). Oral presentation.}
-%
-%\cvitem{Oct 15--17, 2014}{\textbf{DGFZ} -- 24\textsuperscript{th} Annual Conference of the German Society for Cytometry, Dresden. Oral presentation.}
-%
-%\cvitem{Jul 13--16, 2014	}{\textbf{ECB16} -- 16\textsuperscript{th} European Congress on Biotechnology, Edinburgh. Oral presentation.}
-%
-%\cvitem{May 26--28, 2014}{\textbf{DECHEMA} -- Biomaterials Made in Bioreactors, Dresden. Poster.}
-%
-%\cvitem{Mar 06--08, 2013	}{\textbf{RPP7} -- 7\textsuperscript{th} European Conference on Recombinant Protein Production, Ulm. Oral presentation.}
-%
-%\cvitem{Jul 21--25, 2013	}{\textbf{FEMS} -- 5\textsuperscript{th} Congress of European Microbiologists, Leipzig. Poster.}
-%
-%\cvitem{Oct 10--12, 2012}{\textbf{DGFZ} -- 22\textsuperscript{nd} Annual Conference of the German Society for Cytometry, Bonn. Oral presentation.}
-%
-%\cvitem{Jun 23--27, 2012}{\textbf{CYTO 2012} -- 27\textsuperscript{th} Congress of the International Society for Advancement of Cytometry, Leipzig. Oral presentation.}
-
+\colorlink[Link]{https://linkinghub.elsevier.com/retrieve/pii/S0958166912001723}.}
 
 \end{document}

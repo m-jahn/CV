@@ -1,28 +1,9 @@
-% REQUIRED PACKAGES    -------------------------------------------------------------------------
-%
-% +++
-%
-% Install with: sudo apt install ...
-% texlive-latex-base
-% texlive-latex-recommended
-% texlive-latex-extra
-% texlive-fonts-recommended
-% texlive-fonts-extra
-% cm-super
-%
-% +++
-%
-% Install other missing packages using: tlmgr install pdflatex
-%
-% +++
-%
-% Render document: cd tex; pdflatex CV-Michael-Jahn-short.tex
-%
 %%  FORMAT     ---------------------------------------------------------------------------------
 \documentclass[10pt, a4paper, sans]{moderncv}
-\moderncvcolor{green} % 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' 'red'
+\moderncvcolor{blue} % 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' 'red'
 \moderncvstyle{casual} % 'casual', 'classic', 'oldstyle', 'banking'
 \RequirePackage[sfdefault,light]{roboto}
+\input{colorlink.tex} % new option colorlink using default color
 
 %%  INFO       ---------------------------------------------------------------------------------
 \firstname{Michael}
@@ -62,21 +43,21 @@
 
 
 \section{Roles and Qualifications}
-\cvitem{Roles}{Approved project manager for genetic works (\S ~14,15 GenTSV), 2015-2025.}
+\cvitem{Roles}{Approved project manager for genetic works (\S ~14,15 GenTSV), 2015-2026.}
 \cvitem{}{Data protection officer, from 2025.}
 \cvitem{}{Active peer reviewer for Microbial Cell Factories, Frontiers, PLOS Comp Bio, etc.}
 \cvitem{}{Member of the \link[Snakemake]{https://github.com/snakemake} organization, contributor and co-author.}
 \cvitem{Programming}{Fluent in Python, R, Snakemake, Linux bash, Markdown, Latex, Git}
 \cvitem{Software}{
-	\link[WeightedTreemaps]{https://github.com/m-jahn/WeightedTreemaps},
-	\link[ShinyProt]{https://m-jahn.shinyapps.io/ShinyProt/},
-	\link[ShinyLib]{https://m-jahn.shinyapps.io/ShinyLib/},
-	\link[fluctuator]{https://github.com/m-jahn/fluctuator}
-	\link[snakemake-workflow-catalog]{https://github.com/snakemake/snakemake-workflow-catalog},
-	\link[snakemake-crispr-guides]{https://github.com/mpusp/snakemake-crispr-guides},
-	\link[snakemake-simple-mapping]{https://github.com/mpusp/snakemake-simple-mapping},
-	\link[snakemake-workflow-template]{https://github.com/mpusp/snakemake-workflow-template},
-	\link[nf-core-crispriscreen]{https://github.com/MPUSP/nf-core-crispriscreen}
+	\colorlink[snakemake-workflow-catalog]{https://github.com/snakemake/snakemake-workflow-catalog},
+	\colorlink[snakemake-crispr-guides]{https://github.com/mpusp/snakemake-crispr-guides},
+	\colorlink[snakemake-simple-mapping]{https://github.com/mpusp/snakemake-simple-mapping},
+	\colorlink[snakemake-ont-basecalling]{https://github.com/mpusp/snakemake-ont-basecalling},
+	\colorlink[nf-core-crispriscreen]{https://github.com/MPUSP/nf-core-crispriscreen},
+	\colorlink[WeightedTreemaps]{https://github.com/m-jahn/WeightedTreemaps},
+	\colorlink[ShinyProt]{https://m-jahn.shinyapps.io/ShinyProt/},
+	\colorlink[ShinyLib]{https://m-jahn.shinyapps.io/ShinyLib/},
+	\colorlink[fluctuator]{https://github.com/m-jahn/fluctuator}
 }
 \cvitem{Languages}{Fluent in German, English and Swedish}
 
@@ -84,18 +65,18 @@
 \section{Top 5 Publications}
 
 \cvitem{\listitemsymbol}{\textbf{Jahn M} et al., \textit{The energy metabolism of Cupriavidus necator in different trophic conditions}. Applied and Environmental Microbiology, \textbf{2024}.
-\link[Link]{https://doi.org/10.1128/aem.00748-24}.}
+\colorlink[Link]{https://doi.org/10.1128/aem.00748-24}.}
 
 \cvitem{\listitemsymbol}{\underline{Miao R, \textbf{Jahn M}} et al., \textit{CRISPR interference screens reveal growth–robustness tradeoffs in Synechocystis sp. PCC 6803 across growth conditions}. The Plant Cell, \textbf{2023}.
-\link[Link]{https://doi.org/10.1093/plcell/koad208}.}
+\colorlink[Link]{https://doi.org/10.1093/plcell/koad208}.}
 
 \cvitem{\listitemsymbol}{\textbf{Jahn M} et al., \textit{Protein allocation and utilization in the versatile chemolithoautotroph Cupriavidus necator}, eLife, 10, \textbf{2021}.
-\link[Link]{https://elifesciences.org/articles/69019}.}
+\colorlink[Link]{https://elifesciences.org/articles/69019}.}
 
 \cvitem{\listitemsymbol}{Yao L et al., \textbf{Jahn M}, Hudson EP. \textit{Pooled CRISPRi screening of the cyanobacterium Synechocystis sp PCC 6803 for enhanced industrial phenotypes}. Nature Communications, \textbf{2020}.
-\link[Link]{https://www.nature.com/articles/s41467-020-15491-7}.}
+\colorlink[Link]{https://www.nature.com/articles/s41467-020-15491-7}.}
 
 \cvitem{\listitemsymbol}{\textbf{Jahn M} et al., \textit{Growth of Cyanobacteria Is Constrained by the Abundance of Light and Carbon Assimilation Proteins}. Cell Reports 25, 478–486.e8., \textbf{2018}.
-\link[Link]{https://linkinghub.elsevier.com/retrieve/pii/S2211124718314852}.}
+\colorlink[Link]{https://linkinghub.elsevier.com/retrieve/pii/S2211124718314852}.}
 
 \end{document}

@@ -18,24 +18,20 @@ output:
 # attach libraries
 suppressPackageStartupMessages({
   library(tidyverse)
-  library(lattice)
-  library(latticeExtra)
-  library(latticetools)
   library(scholar)
   library(gh)
 })
 
-# customize theme
-theme = custom.colorblind()
-# these options remove white space
-theme$layout.heights$axis.top = 0.5
-theme$layout.heights$top.padding = 0.8
-theme$layout.heights$axis.bottom = 0.95
-theme$layout.heights$bottom.padding = -0.2
-theme$layout.widths$axis.right = 0.5
-theme$layout.widths$axis.left = 0.95
-theme$layout.widths$right.padding = 1
-theme$layout.widths$left.padding = 0.5
+# ggplot theme and palette
+theme_portfolio <- theme_minimal(base_size = 10) +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_line(color = grey(0.8), linewidth = 0.35),
+    axis.title = element_blank(),
+    plot.title = element_text(face = "bold", size = 10)
+  )
+
+portfolio_cols <- c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E", "#E6AB02", "#A6761D", "#666666")
 
 # set scholar ID
 scholar_id <- "jApo8PEAAAAJ"
@@ -44,8 +40,8 @@ scholar_id <- "jApo8PEAAAAJ"
 github_id <- "m-jahn"
 
 # options
-top_pubs = 5
-top_proj = 5
+top_pubs <- 6
+top_proj <- 6
 ```
 
 ## Summary
@@ -68,7 +64,7 @@ df_pubs <- get_publications(scholar_id)
 
 ```{r, echo = FALSE, fig.width = 10, fig.height = 2.5}
 # plot cumulative number of publications over time
-plot_sum_pubs <- df_pubs %>%
+df_sum_pubs <- df_pubs %>%
   filter(!is.na(year)) %>%
   group_by(year) %>%
   summarize(num_of_pubs = n()) %>%
@@ -76,42 +72,36 @@ plot_sum_pubs <- df_pubs %>%
   complete(year = min(year):max(year)) %>%
   mutate(num_of_pubs = replace_na(num_of_pubs, 0)) %>%
   # calculate cumulative sum
-  mutate(cum_sum_of_pubs = cumsum(num_of_pubs)) %>%
-  
-  xyplot(cum_sum_of_pubs ~ year, .,
-    par.settings = theme, lwd = 2, type = c("p", "l"),
-    main = "Cumulative number of publications", 
-    ylab = "", xlab = "",
-    panel = function(x, y, ...) {
-      panel.grid(h = -1, v = -1, col = grey(0.9))
-      panel.xyplot(x, y, ...)
-    }
-  )
+  mutate(cum_sum_of_pubs = cumsum(num_of_pubs))
+
+plot_sum_pubs <- ggplot(df_sum_pubs, aes(x = year, y = cum_sum_of_pubs)) +
+  geom_line(linewidth = 1, color = portfolio_cols[1]) +
+  geom_point(size = 2, color = portfolio_cols[1]) +
+  labs(title = "Cumulative number of publications") +
+  theme_portfolio
 
 
 # plot top X citations
-plot_top_pubs <- df_pubs %>% slice(1:top_pubs) %>%
-  mutate(abbr = author %>% sapply(FUN = function(x) substr(str_split(x, ", ")[[1]][1], 3, 100)) %>% 
-    unname %>% paste0(" et al., ", journal, ", ", year)) %>%
-  mutate(rank = factor(1:top_pubs)) %>%
-  
-  xyplot(rank ~ cites, .,
-    par.settings = theme,
-    groups = rank, lwd = 2,
-    xlim = c(max(df_pubs$cites)*-0.08, max(df_pubs$cites)*1.08),
-    ylim = c(top_pubs+0.5, 0.001),
-    main = paste("Top", top_pubs, "publications by citation"), 
-    ylab = "", xlab = "",
-    panel = function(x, y, ...) {
-      panel.grid(h = -1, v = -1, col = grey(0.9))
-      panel.lollipop(x, y, origin = "left", custom_threshold = 0, ...)
-      panel.text(rep(0, top_pubs), 1:top_pubs-0.5, rev(.[["abbr"]]), pos = 4, 
-        col = theme$superpose.symbol$col[1:top_pubs], cex = 0.75, ...)
-    }
-  )
+df_top_pubs <- df_pubs %>%
+  slice(1:top_pubs) %>%
+  mutate(abbr = author %>% str_split_i(", ", 1) %>% str_split_i(" ", 2) %>%
+    unname() %>% paste0(" et al., ", journal, ", ", year)) %>%
+  mutate(rank = row_number()) %>%
+  mutate(rank_f = forcats::fct_rev(factor(rank)))
 
-print(plot_top_pubs, position = c(0, 0, 0.5, 1), more = TRUE)
-print(plot_sum_pubs, position = c(0.5, 0, 1, 1))
+plot_top_pubs <- ggplot(df_top_pubs, aes(x = cites, y = rank_f, color = factor(rank))) +
+  geom_segment(aes(x = 0, xend = cites, yend = rank_f), linewidth = 1.1) +
+  geom_point(size = 2.2) +
+  geom_text(aes(x = 0, label = abbr), hjust = -0.04, vjust = 1.5, size = 2.6, show.legend = FALSE) +
+  coord_cartesian(xlim = c(max(df_pubs$cites) * -0.08, max(df_pubs$cites) * 1.08), clip = "off") +
+  scale_color_manual(values = portfolio_cols[seq_len(top_pubs)]) +
+  labs(title = paste("Top", top_pubs, "publications by citation")) +
+  theme_portfolio +
+  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), legend.position = "none")
+
+grid::grid.newpage()
+print(plot_top_pubs, vp = grid::viewport(x = 0.25, y = 0.5, width = 0.5, height = 1))
+print(plot_sum_pubs, vp = grid::viewport(x = 0.75, y = 0.5, width = 0.5, height = 1))
 ```
 
 ----------
@@ -124,68 +114,61 @@ df_cites <- get_citation_history(scholar_id) %>%
   mutate(`cites cumulative` = cumsum(cites))
 
 # plot citations over time
-plot_cites <- df_cites %>%
-  xyplot(cites ~ factor(year), .,
-    par.settings = theme, lwd = 2,
-    main = "Citations per year", 
-    ylab = "", xlab = "",
-    panel = function(x, y, ...) {
-      panel.grid(h = -1, v = -1, col = grey(0.9))
-      panel.barplot(x, y, ...)
-    }
-  )
+plot_cites <- ggplot(df_cites, aes(x = year, y = cites)) +
+  geom_col(fill = portfolio_cols[2], width = 0.8) +
+  labs(title = "Citations per year") +
+  theme_portfolio
 
-plot_cites_cum <- df_cites %>%
-  xyplot(`cites cumulative` ~ factor(year), .,
-    par.settings = theme, lwd = 2,
-    main = "Cumulative citations per year", 
-    ylab = "", xlab = "",
-    panel = function(x, y, ...) {
-      panel.grid(h = -1, v = -1, col = grey(0.9))
-      panel.barplot(x, y, fill = "#66A61E", col = "#66A61E", ...)
-    }
-  )
+plot_cites_cum <- ggplot(df_cites, aes(x = year, y = `cites cumulative`)) +
+  geom_col(fill = "#66A61E", width = 0.8) +
+  labs(title = "Cumulative citations per year") +
+  theme_portfolio
 
 # arrange plots next to each other
-print(plot_cites, position = c(0, 0, 0.5, 1), more = TRUE)
-print(plot_cites_cum, position = c(0.5, 0, 1, 1))
+grid::grid.newpage()
+print(plot_cites, vp = grid::viewport(x = 0.25, y = 0.5, width = 0.5, height = 1))
+print(plot_cites_cum, vp = grid::viewport(x = 0.75, y = 0.5, width = 0.5, height = 1))
 ```
 
 ----------
 
 ## Projects & Packages
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
 # use the 'gh' R package to pull user/project information from github;
 # use extra options to increase number of fetched events
 # per_page - Results per page (default: 30, max: 100)
 # page - Page number of the results to fetch, default: 1
-gh_repos <- gh("GET /users/{username}/repos", username = github_id)
+gh_repos <- gh("GET /users/{username}/repos", username = github_id, page = 1, .limit = 100)
 gh_events <- c(
   gh("GET /users/{username}/events", username = github_id, page = 1, .limit = 100),
-  gh("GET /users/{username}/events", username = github_id, page = 2, .limit = 100))
+  gh("GET /users/{username}/events", username = github_id, page = 2, .limit = 100)
+)
 
-# optionally translate week days to English
-week_days = c(`lör` = "sat", fre = "fri", tor = "thu", ons = "wed",
-  tis = "tue", `mån` = "mon", `sön` = "sun")
-
-df_gh_repos <- lapply(gh_repos, FUN = function(x)
-  unlist(x[c("id", "name", "full_name", "html_url", "fork", "size",
-    "stargazers_count", "watchers_count", "has_issues")], recursive = FALSE)) %>%
+df_gh_repos <- lapply(gh_repos, FUN = function(x) {
+  unlist(x[c(
+    "id", "name", "full_name", "html_url", "fork", "size",
+    "stargazers_count", "watchers_count", "has_issues"
+  )], recursive = FALSE)
+}) %>%
   set_names(., lapply(., function(x) x[["name"]])) %>%
-  as.data.frame %>% t %>% as_tibble() %>%
+  as.data.frame() %>%
+  t() %>%
+  as_tibble() %>%
   type_convert(col_types = cols()) %>%
   arrange(desc(stargazers_count))
 
-df_gh_events <- lapply(gh_events, FUN = function(x)
-  unlist(x[c("id", "type", "created_at", "public", "repo")], recursive = TRUE)) %>%
-  as.data.frame %>% t %>% as_tibble() %>%
+df_gh_events <- lapply(gh_events, FUN = function(x) {
+  unlist(x[c("id", "type", "created_at", "public", "repo")], recursive = TRUE)
+}) %>%
+  as.data.frame() %>%
+  t() %>%
+  as_tibble() %>%
   type_convert(col_types = cols()) %>%
   mutate(
     type = str_remove(type, "Event"),
     created_at = as.Date(created_at),
     day = weekdays(created_at, abbreviate = TRUE),
-    day = recode(day, !!!week_days) %>% factor(., unname(week_days)),
     week = format(created_at, "%W")
   )
 ```
@@ -193,47 +176,37 @@ df_gh_events <- lapply(gh_events, FUN = function(x)
 
 ```{r, echo = FALSE}
 # plot top N popular projects by stars
-plot_top_proj <- df_gh_repos %>%
+df_top_proj <- df_gh_repos %>%
   filter(!fork) %>%
   slice(1:top_proj) %>%
-  mutate(rank = factor(1:top_proj)) %>%
-  
-  xyplot(rank ~ stargazers_count, .,
-    par.settings = theme,
-    groups = rank, lwd = 2,
-    xlim = max(.[["stargazers_count"]])*c(-0.08, 1.08),
-    ylim = c(top_proj+0.5, 0.001),
-    main = paste("Top", top_proj, "github repos by stars"), 
-    ylab = "", xlab = "",
-    panel = function(x, y, ...) {
-      panel.grid(h = -1, v = -1, col = grey(0.9))
-      panel.lollipop(x, y, origin = "left", custom_threshold = 0, ...)
-      panel.text(rep(0, top_proj), 1:top_proj-0.5, .[["name"]], pos = 4, 
-        col = theme$superpose.symbol$col[1:top_proj], cex = 0.75, ...)
-    }
-  )
+  mutate(rank = row_number()) %>%
+  mutate(rank_f = forcats::fct_rev(factor(rank)))
+
+plot_top_proj <- ggplot(df_top_proj, aes(x = stargazers_count, y = rank_f, color = factor(rank))) +
+  geom_segment(aes(x = 0, xend = stargazers_count, yend = rank_f), linewidth = 1.1) +
+  geom_point(size = 2.2) +
+  geom_text(aes(x = 0, label = name), hjust = -0.04, vjust = 1.5, size = 2.7, show.legend = FALSE) +
+  coord_cartesian(xlim = max(df_top_proj[["stargazers_count"]]) * c(-0.08, 1.08), clip = "off") +
+  scale_color_manual(values = portfolio_cols[seq_len(top_proj)]) +
+  labs(title = paste("Top", top_proj, "GitHub repos by stars")) +
+  theme_portfolio +
+  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), legend.position = "none")
 ```
 
 
 ```{r, echo = FALSE, eval = FALSE}
 # plot time series of GH activity
 plot_commits <- df_gh_events %>%
+  mutate(type = replace(type, type == "IssueComment", "Issues")) %>%
+  mutate(type = replace(type, !type %in% c("Issues", "PullRequest", "Push"), "Other")) %>%
   group_by(created_at, repo.name, type) %>%
   summarize(commits = n(), .groups = "drop") %>%
-  
-  xyplot(commits ~ created_at, .,
-    par.settings = theme, lty = 0, groups = type,
-    horizontal = FALSE, stack = TRUE, ylim = c(0, 6),
-    col = alpha(colorRampPalette(theme$superpose.symbol$col[c(3,2,5)])(8), 0.8),
-    main = "Commit activity of past 3 months", 
-    ylab = "", xlab = "",
-    panel = function(x, y, ...) {
-      panel.grid(h = -1, v = -1, col = grey(0.9))
-      panel.barchart(x, y, box.width = 1, ...)
-      panel.key(..., cex = 0.6, points = FALSE,
-        background = grey(1, 0.7), corner = c(0, 0.9))
-    }
-  )
+  ggplot(aes(x = created_at, y = commits, fill = type)) +
+  geom_col(width = 0.95, position = "stack", alpha = 0.8) +
+  scale_fill_manual(values = alpha(portfolio_cols)) +
+  coord_cartesian(ylim = c(0, 6)) +
+  labs(title = "Commit activity of past 3 months") +
+  theme_portfolio
 ```
 
 
@@ -243,29 +216,24 @@ plot_commits <- df_gh_events %>%
 plot_commits <- df_gh_events %>%
   group_by(created_at, day, week) %>%
   summarize(commits = n(), .groups = "drop") %>%
-  ungroup %>% mutate(week = factor(week, unique(week))) %>%
-  
-  levelplot(commits ~ week * day, .,
-    par.settings = theme, cuts = 9,
-    col.regions = alpha(colorRampPalette(c("#ADDB7B", "#66A61E"))(10), 0.8),
-    main = "Commit activity of past 3 months", 
-    ylab = "", xlab = "",
-    panel = function(x, y, z, ...) {
-      xnum = as.numeric(x); ynum = as.numeric(y)
-      panel.rect(xleft = min(xnum)-0.5, ybottom = min(ynum)-0.5,
-        xright = max(xnum)+0.5, ytop = max(ynum)+0.5,
-        col = grey(0.9), border = NA)
-      panel.levelplot(x, y, z, ...)
-      panel.abline(h = seq_along(y)-0.5, v = seq_along(x)-0.5,
-        col = "white", lwd = 3)
-    }
-  )
+  ungroup() %>%
+  mutate(week = factor(week, seq(min(week), max(week)))) %>%
+  complete(day = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"), week) %>%
+  mutate(commits = replace(commits, commits > 5, 5)) %>%
+  ggplot(aes(x = week, y = day, fill = commits)) +
+  geom_tile(color = "white", linewidth = 0.8) +
+  guides(fill = guide_colorbar(title = NULL, barwidth = 0.5)) +
+  scale_fill_gradientn(colors = colorRampPalette(c("#ADDB7B", "#66A61E"))(10), limits = c(1, 5), na.value = "grey90") +
+  labs(title = "Commit activity of past 3 months") +
+  theme_portfolio +
+  theme(panel.grid = element_blank())
 ```
 
 
 ```{r, echo = FALSE, fig.width = 10, fig.height = 2.5}
-print(plot_top_proj, position = c(0, 0, 0.5, 1), more = TRUE)
-print(plot_commits, position = c(0.5, 0, 1, 1))
+grid::grid.newpage()
+print(plot_top_proj, vp = grid::viewport(x = 0.25, y = 0.5, width = 0.5, height = 1))
+print(plot_commits, vp = grid::viewport(x = 0.75, y = 0.5, width = 0.5, height = 1))
 ```
 
 
@@ -274,5 +242,5 @@ print(plot_commits, position = c(0.5, 0, 1, 1))
 ## References
 
 This portfolio is an R notebook that automatically retrieves citation and profile data from [Google scholar](https://scholar.google.com/) and [Github](https://github.com/). Retrieval is performed using R packages [scholar](https://github.com/jkeirstead/scholar) and [gh](https://github.com/r-lib/gh).
-The source code is available on [Github](https://github.com/m-jahn/CV).
+The source code is available on [GitHub](https://github.com/m-jahn/CV/portfolio).
 
