@@ -20,6 +20,7 @@ suppressPackageStartupMessages({
   library(tidyverse)
   library(scholar)
   library(gh)
+  library(waffle)
 })
 
 # ggplot theme and palette
@@ -38,6 +39,7 @@ scholar_id <- "jApo8PEAAAAJ"
 
 # set github user ID
 github_id <- "m-jahn"
+github_token <- Sys.getenv("GITHUB_TOKEN")
 
 # options
 top_pubs <- 6
@@ -49,7 +51,7 @@ top_proj <- 6
 - 15 years of experience in life science and data science
 - published `r get_num_articles(scholar_id)` articles in `r get_num_distinct_journals(scholar_id)` peer-reviewed journals
 - supervised master students, graduate students and junior postdocs
-- build and maintain open source pipelines and software packages (R, python)
+- build and maintain open source pipelines and software packages (snakemake, python, R)
 - passionate about open science, transparency and reproducibility
 
 ----------
@@ -79,7 +81,6 @@ plot_sum_pubs <- ggplot(df_sum_pubs, aes(x = year, y = cum_sum_of_pubs)) +
   geom_point(size = 2, color = portfolio_cols[1]) +
   labs(title = "Cumulative number of publications") +
   theme_portfolio
-
 
 # plot top X citations
 df_top_pubs <- df_pubs %>%
@@ -139,8 +140,8 @@ print(plot_cites_cum, vp = grid::viewport(x = 0.75, y = 0.5, width = 0.5, height
 # use extra options to increase number of fetched events
 # per_page - Results per page (default: 30, max: 100)
 # page - Page number of the results to fetch, default: 1
-gh_repos <- gh("GET /users/{username}/repos", username = github_id, page = 1, .limit = 100)
-gh_events <- gh("GET /users/{username}/events", username = github_id, .limit = 100)
+gh_repos <- gh("GET /users/{username}/repos", username = github_id, .token = github_token, .limit = 100)
+gh_events <- gh("GET /users/{username}/events", username = github_id, .token = github_token, .limit = 100)
 
 df_gh_repos <- lapply(gh_repos, FUN = function(x) {
   unlist(x[c(
@@ -193,26 +194,32 @@ plot_top_proj <- ggplot(df_top_proj, aes(x = stargazers_count, y = rank_f, color
 ```
 
 
-```{r, echo = FALSE, eval = FALSE}
+```{r, echo = FALSE}
 # plot time series of GH activity
-plot_commits <- df_gh_events %>%
+plot_commits_boxes <- df_gh_events %>%
+  filter(created_at >= Sys.Date() - 30) %>%
   mutate(type = replace(type, type == "IssueComment", "Issues")) %>%
   mutate(type = replace(type, !type %in% c("Issues", "PullRequest", "Push"), "Other")) %>%
-  group_by(created_at, repo.name, type) %>%
+  mutate(week = factor(week, seq(min(week), max(week)))) %>%
+  group_by(week, type) %>%
   summarize(commits = n(), .groups = "drop") %>%
-  ggplot(aes(x = created_at, y = commits, fill = type)) +
-  geom_col(width = 0.95, position = "stack", alpha = 0.8) +
-  scale_fill_manual(values = alpha(portfolio_cols)) +
-  coord_cartesian(ylim = c(0, 6)) +
-  labs(title = "Commit activity of past 3 months") +
-  theme_portfolio
+  mutate(type = factor(type, levels = c("Push", "PullRequest", "Issues", "Other"))) %>%
+  arrange(type) %>%
+  ggplot(aes(values = commits, fill = type)) +
+  geom_waffle(color = "white", size = 1.125, n_rows = 6) +
+  facet_grid(~ week, switch = "x") +
+  scale_fill_manual(values = portfolio_cols[c(4,3,1,2)]) +
+  labs(title = "Commit activity of past 4 weeks") +
+  theme_portfolio +
+  theme(axis.text = element_blank(), axis.ticks = element_blank())
 ```
 
 
 ```{r, echo = FALSE}
 # alternative to last plot is tileplot/levelplot, week vs day as on github
 # plot time series of GH activity
-plot_commits <- df_gh_events %>%
+plot_commits_tiles <- df_gh_events %>%
+  filter(created_at >= Sys.Date() - 30) %>%
   group_by(created_at, day, week) %>%
   summarize(commits = n(), .groups = "drop") %>%
   ungroup() %>%
@@ -223,7 +230,7 @@ plot_commits <- df_gh_events %>%
   geom_tile(color = "white", linewidth = 0.8) +
   guides(fill = guide_colorbar(title = NULL, barwidth = 0.5)) +
   scale_fill_gradientn(colors = colorRampPalette(c("#ADDB7B", "#66A61E"))(10), limits = c(1, 5), na.value = "grey90") +
-  labs(title = "Commit activity of past 3 months") +
+  labs(title = "Commit activity of past 30 days") +
   theme_portfolio +
   theme(panel.grid = element_blank())
 ```
@@ -232,7 +239,7 @@ plot_commits <- df_gh_events %>%
 ```{r, echo = FALSE, fig.width = 10, fig.height = 2.5}
 grid::grid.newpage()
 print(plot_top_proj, vp = grid::viewport(x = 0.25, y = 0.5, width = 0.5, height = 1))
-print(plot_commits, vp = grid::viewport(x = 0.75, y = 0.5, width = 0.5, height = 1))
+print(plot_commits_boxes, vp = grid::viewport(x = 0.75, y = 0.5, width = 0.5, height = 1))
 ```
 
 
