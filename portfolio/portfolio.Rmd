@@ -21,7 +21,6 @@ suppressPackageStartupMessages({
   library(scholar)
   library(gh)
   library(waffle)
-  library(grDevices)
 })
 
 # ggplot theme and palette
@@ -36,11 +35,11 @@ theme_portfolio <- theme_minimal(base_size = 10) +
 portfolio_cols <- c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E", "#E6AB02", "#A6761D", "#666666")
 
 # set scholar ID
-scholar_id <- "jApo8PEAAAAJ"
+scholar_id <- Sys.getenv("SCHOLAR_ID", unset = NA)
 
 # set github user ID
-github_id <- "m-jahn"
-github_token <- Sys.getenv("GITHUB_TOKEN")
+github_id <- Sys.getenv("GITHUB_ID", unset = NA)
+github_token <- Sys.getenv("GITHUB_TOKEN", unset = NA)
 
 # options
 top_pubs <- 6
@@ -81,7 +80,16 @@ save_plot <- function(
 
 ```{r, echo = FALSE}
 # retrieve publication stats
-df_pubs <- get_publications(scholar_id)
+if (is.na(scholar_id)) {
+  stop("Please set the SCHOLAR_ID environment variable to your Google Scholar ID.")
+} else {
+  df_pubs <- get_publications(scholar_id)
+}
+
+# fall back to local copy if unavailable
+if (!is.data.frame(df_pubs) || nrow(df_pubs) == 0) {
+  df_pubs <- read_tsv("publications.tsv", col_types = cols())
+}
 ```
 
 

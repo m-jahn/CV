@@ -47,3 +47,5 @@ The portfolio can be built using a pixi task.
 ```bash
 pixi run make-portfolio
 ```
+
+The pixi task is automatically executed once a week and commits the updated portfolio to the `docs/` folder, which is then rendered by GitHub pages.
