@@ -21,6 +21,7 @@ suppressPackageStartupMessages({
   library(scholar)
   library(gh)
   library(waffle)
+  library(grDevices)
 })
 
 # ggplot theme and palette
@@ -44,6 +45,26 @@ github_token <- Sys.getenv("GITHUB_TOKEN")
 # options
 top_pubs <- 6
 top_proj <- 6
+
+# function to export an image as svg and png
+save_plot <- function(
+  pl, path = "../figures/",
+  width = 5, height = 2.5
+) {
+  pl_name <- deparse(substitute(pl))
+  svg(
+    filename = paste0(path, pl_name, ".svg"),
+    width = width, height = height
+  )
+  print(pl)
+  dev.off()
+  png(
+    filename = paste0(path, pl_name, ".png"),
+    width = width * 125, height = height * 125, res = 120
+  )
+  print(pl)
+  invisible(capture.output(dev.off()))
+}
 ```
 
 ## Summary
@@ -103,6 +124,9 @@ plot_top_pubs <- ggplot(df_top_pubs, aes(x = cites, y = rank_f, color = factor(r
 grid::grid.newpage()
 print(plot_top_pubs, vp = grid::viewport(x = 0.25, y = 0.5, width = 0.5, height = 1))
 print(plot_sum_pubs, vp = grid::viewport(x = 0.75, y = 0.5, width = 0.5, height = 1))
+
+save_plot(plot_top_pubs)
+save_plot(plot_sum_pubs)
 ```
 
 ----------
@@ -129,6 +153,9 @@ plot_cites_cum <- ggplot(df_cites, aes(x = year, y = `cites cumulative`)) +
 grid::grid.newpage()
 print(plot_cites, vp = grid::viewport(x = 0.25, y = 0.5, width = 0.5, height = 1))
 print(plot_cites_cum, vp = grid::viewport(x = 0.75, y = 0.5, width = 0.5, height = 1))
+
+save_plot(plot_cites)
+save_plot(plot_cites_cum)
 ```
 
 ----------
@@ -207,8 +234,8 @@ plot_commits_boxes <- df_gh_events %>%
   arrange(type) %>%
   ggplot(aes(values = commits, fill = type)) +
   geom_waffle(color = "white", size = 1.125, n_rows = 6) +
-  facet_grid(~ week, switch = "x") +
-  scale_fill_manual(values = portfolio_cols[c(4,3,1,2)]) +
+  facet_grid(~week, switch = "x") +
+  scale_fill_manual(values = portfolio_cols[c(4, 3, 1, 2)]) +
   labs(title = "Commit activity of past 4 weeks") +
   theme_portfolio +
   theme(axis.text = element_blank(), axis.ticks = element_blank())
@@ -240,13 +267,15 @@ plot_commits_tiles <- df_gh_events %>%
 grid::grid.newpage()
 print(plot_top_proj, vp = grid::viewport(x = 0.25, y = 0.5, width = 0.5, height = 1))
 print(plot_commits_boxes, vp = grid::viewport(x = 0.75, y = 0.5, width = 0.5, height = 1))
-```
 
+save_plot(plot_top_proj)
+save_plot(plot_commits_boxes)
+```
 
 ----------
 
 ## References
 
-This portfolio is an R notebook that automatically retrieves citation and profile data from [Google scholar](https://scholar.google.com/) and [Github](https://github.com/). Retrieval is performed using R packages [scholar](https://github.com/jkeirstead/scholar) and [gh](https://github.com/r-lib/gh).
+This portfolio is an R notebook that automatically retrieves citation and profile data from [Google scholar](https://scholar.google.com/) and [Github](https://github.com/).
+Retrieval is performed using R packages [scholar](https://github.com/jkeirstead/scholar) and [gh](https://github.com/r-lib/gh).
 The source code is available on [GitHub](https://github.com/m-jahn/CV/portfolio).
-

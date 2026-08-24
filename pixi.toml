@@ -6,10 +6,10 @@ platforms = ["linux-64"]
 version = "0.1.0"
 
 [tasks]
-make-cv = {cmd = "pdflatex -output-directory=tex tex/CV-Michael-Jahn.tex"}
-make-cv-short = {cmd = "pdflatex -output-directory=tex tex/CV-Michael-Jahn-short.tex"}
-make-cv-german = {cmd = "pdflatex -output-directory=tex tex/CV-Michael-Jahn_DE.tex"}
-make-portfolio = {cmd = "Rscript -e 'rmarkdown::render(\"portfolio/portfolio.Rmd\")'"}
+make-cv = { cmd = "pdflatex -output-directory=tex tex/CV-Michael-Jahn.tex" }
+make-cv-short = { cmd = "pdflatex -output-directory=tex tex/CV-Michael-Jahn-short.tex" }
+make-cv-german = { cmd = "pdflatex -output-directory=tex tex/CV-Michael-Jahn_DE.tex" }
+make-portfolio = { cmd = "Rscript -e 'rmarkdown::render(\"portfolio/portfolio.Rmd\")' && cp portfolio/portfolio.html docs/" }
 
 [dependencies]
 r-tidyverse = ">=2.0.0,<3"
