@@ -23,8 +23,6 @@ jobs:
 
       - name: make portfolio
         env:
-          SCHOLAR_ID: "jApo8PEAAAAJ"
-          GITHUB_ID: "m-jahn"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pixi run make-portfolio
 

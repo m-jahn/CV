@@ -1,5 +1,9 @@
 # CV - curriculum vitae - Michael Jahn
 
+[![Build portfolio](https://github.com/m-jahn/CV/actions/workflows/build_portfolio.yml/badge.svg)](https://github.com/m-jahn/CV/actions/workflows/build_portfolio.yml)
+[![pages-build-deployment](https://github.com/m-jahn/CV/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/m-jahn/CV/actions/workflows/pages/pages-build-deployment)
+![GitHub last commit](https://img.shields.io/github/last-commit/m-jahn/CV/main)
+
 Repository for maintaining an up-to-date, lean, and public version of my CV.
 
 ### Content
@@ -48,4 +52,4 @@ The portfolio can be built using a pixi task.
 pixi run make-portfolio
 ```
 
-The pixi task is automatically executed once a week and commits the updated portfolio to the `docs/` folder, which is then rendered by GitHub pages.
+The pixi task is automatically executed once a week and commits the updated portfolio to the `docs/` folder, which is then rendered by GitHub as a [static page](https://m-jahn.github.io/CV/portfolio.html).

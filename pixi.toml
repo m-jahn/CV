@@ -9,7 +9,7 @@ version = "0.1.0"
 make-cv = { cmd = "pdflatex -output-directory=tex tex/CV-Michael-Jahn.tex" }
 make-cv-short = { cmd = "pdflatex -output-directory=tex tex/CV-Michael-Jahn-short.tex" }
 make-cv-german = { cmd = "pdflatex -output-directory=tex tex/CV-Michael-Jahn_DE.tex" }
-make-portfolio = { cmd = "Rscript -e 'rmarkdown::render(\"portfolio/portfolio.Rmd\")' && cp portfolio/portfolio.html docs/" }
+make-portfolio = { cmd = "Rscript -e 'rmarkdown::render(\"portfolio/portfolio.Rmd\")' && cp portfolio/portfolio.html docs/", env = { SCHOLAR_ID = "jApo8PEAAAAJ", GITHUB_ID = "m-jahn" } }
 
 [dependencies]
 r-tidyverse = ">=2.0.0,<3"

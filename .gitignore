@@ -5,6 +5,7 @@
 .Rhistory
 tex/*.pdf
 tex/coverletter*
+figures/*
 # pixi environments
 .pixi/*
 !.pixi/config.toml
