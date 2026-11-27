@@ -40,9 +40,23 @@ Render document using [pixi](https://pixi.prefix.dev/) tasks.
 pixi run make-cv
 ```
 
+### Personal (or confidential) information
+
+Personal contact details (address, phone, email, photo) are kept in a separate file `tex/personalinfo.tex` which is not part of this repository (listed in `.gitignore`). In order to use the CV, create a simple `tex/personalinfo.tex` file and add your private information like this:
+
+```latex
+\newcommand{\addressline}{Your Street Address}
+\newcommand{\addresspostal}{Your Postal Code City}
+\newcommand{\addresscountry}{Your Country}
+\newcommand{\mymobile}{Your Phone Number}
+\newcommand{\myemail}{your.email@example.com}
+\newcommand{\photopath}{../figures/profile.png}
+\newcommand{\photosize}{0.25\textwidth}
+```
+
 ### Data science portfolio
 
-The repo contains an R notebook (source: `portfolio/portfolio.Rmd`) that automatically retrieves citation and profile data from [Google scholar](https://scholar.google.com/) and [Github](https://github.com/).
+The repo contains an R notebook (source: `portfolio/portfolio.Rmd`) that automatically retrieves citation and profile data from [Google Scholar](https://scholar.google.com/) and [Github](https://github.com/).
 Retrieval is performed using R packages [scholar](https://github.com/jkeirstead/scholar) and [gh](https://github.com/r-lib/gh).
 A rendered HTML of the portfolio is available [here](https://m-jahn.github.io/CV/portfolio.html).
 

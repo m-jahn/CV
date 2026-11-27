@@ -5,6 +5,7 @@
 .Rhistory
 tex/*.pdf
 tex/coverletter*
+tex/personalinfo.tex
 figures/*
 # pixi environments
 .pixi/*
