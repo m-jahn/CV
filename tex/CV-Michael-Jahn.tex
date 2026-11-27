@@ -3,22 +3,26 @@
 \moderncvcolor{blue} % 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' 'red'
 \moderncvstyle{casual} % 'casual', 'classic', 'oldstyle', 'banking'
 \RequirePackage[sfdefault,light]{roboto}
+\usepackage{geometry}
 \input{colorlink.tex} % new option colorlink using default color
+
+%%  PERSONAL INFO  -------------------------------------------------------------------------
+\input{personalinfo.tex}
 
 %%  INFO       ---------------------------------------------------------------------------------
 \firstname{Michael}
 \familyname{Jahn}
 \title{Curriculum vitae}
-\address{Street name, number}{ZIP code City, Country}
-\mobile{+49\,123\,456789}
-\email{jahn$@$email.de}
-\photo[0.25\textwidth]{../figures/profile_2020.png}
+\address{\addressline}{\addresspostal}{\addresscountry}
+\mobile{\mymobile}
+\email{\myemail}
+\photo[\photosize]{\photopath}
 
 
 \begin{document}
 
 %%  OPTIONAL COVERLETTER    ---------------------------------------------------------------------
-% \input{coverletter.tex}
+\input{coverletter.tex}
 
 \newpage
 
@@ -30,11 +34,11 @@
 
 
 \section{Personal information}
-\cvitem{Name}{Dr. rer. nat. Michael Jahn}
-\cvitem{Date of birth}{Dec 31, 1985, in Dresden, GER}
-\cvitem{Address}{Street name, number, ZIP code City, Country}
-\cvitem{Mobile phone}{+49\,123\,456\,789}
-\cvitem{Email}{jahn@email.de}
+\cvitem{Name}{Michael Jahn, PhD}
+\cvitem{Date of birth}{\birthdate, in \birthplace}
+\cvitem{Addresse}{\addressline, \addresspostal, \addresscountry}
+\cvitem{Mobil}{\mymobile}
+\cvitem{Email}{\myemail}
 
 
 \section{Current position}
@@ -94,14 +98,14 @@ Total funds: 2,000,000 SEK (200,000 Euro).}
 
 \section{Qualifications and skills}
 \cvitem{Expertise}{
-	High-throughput lab methods (NGS, protein mass spectrometry)
-	Creation of pipelines for automated data processing, \newline
-	Analysis and visualization of complex data, \newline
-	Application of clustering and machine learning algorithms, \newline
-	Project management, supervision, leadership, \newline
-	Scientific writing of papers, funding proposals, reports, \newline
+	High-throughput lab methods (NGS, protein mass spectrometry) \newline
+	Creation of workflows for automated data processing, HPCs \newline
+	Analysis and visualization of complex data \newline
+	Application of clustering and machine learning algorithms \newline
+	Project management, supervision, leadership \newline
+	Extensive experience in writing papers, funding proposals, reports \newline
 }
-\cvitem{Programming languages}{Fluent in Python, R, Snakemake, Linux bash, Markdown, Latex, Git}
+\cvitem{Programming languages}{Python, R, Snakemake, Nextflow, Linux bash, Markdown, Git/GitHub}
 \cvitem{Authored software}{
 	\colorlink[snakemake-workflow-catalog]{https://github.com/snakemake/snakemake-workflow-catalog},
 	\colorlink[snakemake-crispr-guides]{https://github.com/mpusp/snakemake-crispr-guides},
@@ -111,6 +115,7 @@ Total funds: 2,000,000 SEK (200,000 Euro).}
 	\colorlink[WeightedTreemaps]{https://github.com/m-jahn/WeightedTreemaps},
 	\colorlink[ShinyProt]{https://m-jahn.shinyapps.io/ShinyProt/},
 	\colorlink[ShinyLib]{https://m-jahn.shinyapps.io/ShinyLib/},
+	\colorlink[ShinyGenomeStats]{https://m-jahn.shinyapps.io/shiny-genome-stats/},
 	\colorlink[fluctuator]{https://github.com/m-jahn/fluctuator}
 }
 % \cvitem{Metabolic models}{
@@ -118,13 +123,13 @@ Total funds: 2,000,000 SEK (200,000 Euro).}
 % 	\link[Genome scale metabolic model (python)]{https://github.com/m-jahn/genome-scale-models} for \textit{Cupriavidus necator}.\newline
 % 	\link[Resource balance analysis model (python)]{https://github.com/m-jahn/genome-scale-models} for \textit{Cupriavidus necator}.
 % }
-\cvitem{Certificates}{Approved project manager for genetic works (\S ~14,15 GenTSV), 2015, refresher 2024, 2026.}
-
+\cvitem{Qualifications}{Approved project manager for genetic works (\S ~14,15 GenTSV), 2015, refresher 2024, 2026.}
+\cvitem{}{Data Protection Coordinator at MPUSP, 2026-.}
 
 \section{Peer review and outreach}
 \cvitem{Editorial role}{Review Editor for Frontiers in Bioengineering and Biotechnology}
-\cvitem{Peer review}{Active reviewer for several journals including Microbial Cell Factories, Frontiers in Microbiology, Photosynthesis Research, and others (\link[ORCID]{https://orcid.org/0000-0002-3913-153X}).}
-\cvitem{Outreach}{All software and computational pipelines available on \link[GitHub]{https://github.com/m-jahn/}. Research communicated to the public \textit{via} \link[home page]{https://m-jahn.github.io/}, \link[ResearchGate]{https://www.researchgate.net/profile/Michael_Jahn}, and \link[X]{https://x.com/mich_jahn}.}
+\cvitem{Peer review}{Reviewer for various journals including Microbial Cell Factories, Frontiers in Microbiology, Photosynthesis Research, and others (\colorlink[ORCID]{https://orcid.org/0000-0002-3913-153X}).}
+\cvitem{Outreach}{Research software and workflows available on \colorlink[GitHub]{https://github.com/m-jahn/}. Research communicated to the public \textit{via} \colorlink[home page]{https://m-jahn.github.io/}, \colorlink[ResearchGate]{https://www.researchgate.net/profile/Michael_Jahn}, \colorlink[LinkedIn]{https://www.linkedin.com/in/michael-jahn-246839224/}, and \colorlink[X]{https://x.com/mich_jahn}.}
 
 
 \section{Languages}
@@ -133,7 +138,7 @@ Total funds: 2,000,000 SEK (200,000 Euro).}
 \cvitem{Swedish}{Fluent, CEF level B2}
 
 
-\newpage
+% \newpage
 
 
 \section{Selected publications}

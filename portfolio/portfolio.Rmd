@@ -12,6 +12,11 @@ output:
 ----------
 
 ```{r, echo = FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+
+```{r}
 # GLOBAL OPTIONS
 # ==============
 #
@@ -66,10 +71,36 @@ save_plot <- function(
 }
 ```
 
+
+```{r}
+# retrieve publication stats
+if (is.na(scholar_id)) {
+  stop("Please set the SCHOLAR_ID environment variable to your Google Scholar ID.")
+} else {
+  df_pubs <- get_publications(scholar_id)
+  df_cites <- get_citation_history(scholar_id) %>%
+    mutate(`cites cumulative` = cumsum(cites))
+}
+
+# fall back to local copy if unavailable
+if (!is.data.frame(df_pubs) || nrow(df_pubs) == 0) {
+  df_pubs <- read_tsv("publications.tsv", col_types = cols())
+}
+if (!is.data.frame(df_cites) || nrow(df_cites) == 0) {
+  df_cites <- read_tsv("citations.tsv", col_types = cols())
+}
+
+# get summary metrics
+num_articles <- get_num_articles(scholar_id)
+num_journals <- get_num_distinct_journals(scholar_id)
+if (is.na(num_articles)) num_articles <- nrow(df_pubs)
+if (is.na(num_journals)) num_journals <- nrow(count(df_pubs, journal))
+```
+
 ## Summary
 
 - 15 years of experience in life science and data science
-- published `r get_num_articles(scholar_id)` articles in `r get_num_distinct_journals(scholar_id)` peer-reviewed journals
+- published `r num_articles` articles in `r num_journals` peer-reviewed journals
 - supervised master students, graduate students and junior postdocs
 - build and maintain open source pipelines and software packages (snakemake, python, R)
 - passionate about open science, transparency and reproducibility
@@ -78,22 +109,7 @@ save_plot <- function(
 
 ## Publications
 
-```{r, echo = FALSE}
-# retrieve publication stats
-if (is.na(scholar_id)) {
-  stop("Please set the SCHOLAR_ID environment variable to your Google Scholar ID.")
-} else {
-  df_pubs <- get_publications(scholar_id)
-}
-
-# fall back to local copy if unavailable
-if (!is.data.frame(df_pubs) || nrow(df_pubs) == 0) {
-  df_pubs <- read_tsv("publications.tsv", col_types = cols())
-}
-```
-
-
-```{r, echo = FALSE, fig.width = 10, fig.height = 2.5}
+```{r, fig.width = 10, fig.height = 2.5}
 # plot cumulative number of publications over time
 df_sum_pubs <- df_pubs %>%
   filter(!is.na(year)) %>%
@@ -141,11 +157,7 @@ save_plot(plot_sum_pubs)
 
 ## Citations
 
-```{r, echo = FALSE, fig.width = 10, fig.height = 2.5}
-# retrieve citation stats
-df_cites <- get_citation_history(scholar_id) %>%
-  mutate(`cites cumulative` = cumsum(cites))
-
+```{r, fig.width = 10, fig.height = 2.5}
 # plot citations over time
 plot_cites <- ggplot(df_cites, aes(x = year, y = cites)) +
   geom_col(fill = portfolio_cols[2], width = 0.8) +
@@ -170,7 +182,7 @@ save_plot(plot_cites_cum)
 
 ## Projects & Packages
 
-```{r, echo = FALSE, warning=FALSE, message=FALSE}
+```{r}
 # use the 'gh' R package to pull user/project information from github;
 # use extra options to increase number of fetched events
 # per_page - Results per page (default: 30, max: 100)
@@ -209,7 +221,7 @@ weekdays <- c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
 ```
 
 
-```{r, echo = FALSE}
+```{r}
 # plot top N popular projects by stars
 df_top_proj <- df_gh_repos %>%
   filter(!fork) %>%
@@ -229,7 +241,7 @@ plot_top_proj <- ggplot(df_top_proj, aes(x = stargazers_count, y = rank_f, color
 ```
 
 
-```{r, echo = FALSE}
+```{r}
 # plot time series of GH activity
 plot_commits_boxes <- df_gh_events %>%
   filter(created_at >= Sys.Date() - 30) %>%
@@ -250,7 +262,7 @@ plot_commits_boxes <- df_gh_events %>%
 ```
 
 
-```{r, echo = FALSE}
+```{r}
 # alternative to last plot is tileplot/levelplot, week vs day as on github
 # plot time series of GH activity
 plot_commits_tiles <- df_gh_events %>%
@@ -271,7 +283,7 @@ plot_commits_tiles <- df_gh_events %>%
 ```
 
 
-```{r, echo = FALSE, fig.width = 10, fig.height = 2.5}
+```{r, fig.width = 10, fig.height = 2.5}
 grid::grid.newpage()
 print(plot_top_proj, vp = grid::viewport(x = 0.25, y = 0.5, width = 0.5, height = 1))
 print(plot_commits_boxes, vp = grid::viewport(x = 0.75, y = 0.5, width = 0.5, height = 1))
